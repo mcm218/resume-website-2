@@ -1,0 +1,27 @@
+header {
+  position: fixed;
+  width: calc(100%);// - 2 * var(--site-side-padding));
+  top: 0;
+  left: 0;
+  padding: 0;
+}
+
+#header-overlay {
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  overflow: hidden;
+}
+
+section {
+  padding: 0;
+}
+
+@media screen and (max-width: 600px) {
+  #header-overlay {
+    grid-template-columns: auto;
+    // border-radius: 10px;
+    // background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem;
+  }
+}

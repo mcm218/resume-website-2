@@ -1,0 +1,8 @@
+<section class="experience-list">
+    <h2>{{ role.title }}</h2>
+    <ul>
+        <li *ngFor="let item of role.experience">
+            <app-experience-card [item]="item"></app-experience-card>
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,171 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("./assets/Montserrat/Montserrat.css");
+
+@mixin alpha($property, $color-variable, $opacity) {
+  $color-variable-h: var(#{$color-variable + "-h"});
+  $color-variable-s: var(#{$color-variable + "-s"});
+  $color-variable-l: var(#{$color-variable + "-l"});
+  #{$property}: hsla(
+    $color-variable-h,
+    $color-variable-s,
+    $color-variable-l,
+    $opacity
+  );
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  --purple: #9b5de5;
+  --pink: #f15bb5;
+  --yellow: #fee440;
+
+  --blue: hsl(195, 100%, 49%);
+  --blue-h: 195;
+  --blue-s: 100%;
+  --blue-l: 49%;
+
+  --white: hsl(0, 0%, 100%);
+  --white-h: 0;
+  --white-s: 0%;
+  --white-l: 100%;
+
+  --gray: hsl(0, 0%, 50%);
+  --gray-h: 0;
+  --gray-s: 0%;
+  --gray-l: 50%;
+
+  --grayblue: hsl(195, 85%, 80%);
+  --grayblue-h: 195;
+  --grayblue-s: 85%;
+  --grayblue-l: 80%;
+
+  --green: #00f5d4;
+  --red: #e76f51;
+  --light-red: #f4a261;
+
+  --transparent-purple: rgba(155, 93, 229, 0.5);
+
+  --card-radius: 0.3rem;
+  --site-side-padding: 1rem;
+
+  color: white;
+
+  margin: 0;
+  font-family: "Montserrat", "Helvetica Neue", sans-serif;
+}
+
+section {
+  padding: 1rem;
+}
+
+aside {
+  padding: 1rem;
+}
+
+header {
+  padding: 1rem;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+ul,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: 0.3rem;
+  font-weight: 200;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-weight: 300;
+}
+
+h3 {
+  color: var(--blue);
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
+a,
+a:-webkit-any-link {
+  color: inherit;
+}
+
+// Progress bars
+progress {
+  color: var(--blue);
+}
+
+progress::-moz-progress-bar {
+  background: lightcolor;
+}
+
+progress::-webkit-progress-value {
+  background: red;
+}
+
+progress::-webkit-progress-bar {
+  background: blue;
+}
+
+// Scrollbar
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  border-radius: 0.25rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @include alpha(background, --blue, 0.7);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,21 @@
+// WIP Alert
+#wip-alert {
+  z-index: 9999;
+  position: fixed;
+  border-radius: 0.6rem;
+  width: 10rem;
+  background-color: var(--blue);
+  color: black;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+button {
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  border: none;
+  float: right;
+}

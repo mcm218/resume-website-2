@@ -1,0 +1,119 @@
+@mixin alpha($property, $color-variable, $opacity) {
+  $color-variable-h: var(#{$color-variable + "-h"});
+  $color-variable-s: var(#{$color-variable + "-s"});
+  $color-variable-l: var(#{$color-variable + "-l"});
+  #{$property}: hsla(
+    $color-variable-h,
+    $color-variable-s,
+    $color-variable-l,
+    $opacity
+  );
+}
+
+li {
+  padding: 0.25rem 0;
+}
+
+.experience-primary {
+  margin-top: 1.25rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.experience-secondary {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+li {
+  list-style: square;
+}
+
+li:nth-child(even) {
+  font-weight: 400;
+}
+
+li:nth-child(odd) {
+  font-weight: 400;
+}
+
+.filterItem,
+.filterItem-selected {
+  margin: 0 5px;
+  fill: currentColor;
+}
+
+.hidden {
+  @include alpha(color, --white, 0.7);
+  transition: color 0.5s ease;
+
+  div h3 {
+    @include alpha(color, --blue, 0.7);
+    transition: color 0.5s ease;
+  }
+
+  li:nth-child(odd) {
+    @include alpha(color, --grayblue, 0.7);
+    transition: color 0.5s ease;
+  }
+
+  .filterItem {
+    @include alpha(color, --gray, 0.7);
+    transition: color 0.5s ease;
+    transition: color 0.5s ease;
+  }
+
+  .filterItem:hover {
+    @include alpha(color, --gray, 0.4);
+    transition: color 0.25s ease;
+  }
+
+  .filterItem-selected {
+    color: var(--blue);
+    transition: color 0.5s ease;
+  }
+
+  .filterItem-selected:hover {
+    @include alpha(color, --blue, 0.7);
+    transition: color 0.25s ease;
+  }
+}
+
+.displayed {
+  transition: color 0.5s ease;
+  div h3 {
+    transition: color 0.5s ease;
+  }
+
+  li:nth-child(odd) {
+    color: var(--grayblue);
+    transition: color 0.5s ease;
+  }
+
+  .filterItem {
+    color: var(--gray);
+    transition: color 0.5s ease;
+  }
+  .filterItem:hover {
+    @include alpha(color, --gray, 0.7);
+    transition: color 0.25s ease;
+  }
+
+  .filterItem-selected {
+    color: var(--blue);
+    transition: color 0.5s ease;
+  }
+
+  .filterItem-selected:hover {
+    @include alpha(color, --blue, 0.7);
+    transition: color 0.25s ease;
+  }
+}

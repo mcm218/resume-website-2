@@ -1,0 +1,31 @@
+<div #app_container id="app-container">
+  <!-- <app-wip-alert></app-wip-alert> -->
+  <app-filter-toolbar (expandedEvent)="FilterToolbarToggled ($event)"></app-filter-toolbar>
+  <div #mobile_underlay id="mobile-underlay"></div>
+  <div class="primary-column" [ngClass]="filterIsExpanded ? 'filterExpanded' : 'filterHidden'">
+    <section class="main-header">
+      <app-header
+        [title]="contact.name"
+        [subtitle]="contact.title"
+        [education]="education"
+        [contact]="contact"
+      ></app-header>
+    </section>
+
+    <section *ngFor="let item of this.experienceList">
+      <app-experience-list [role]="item"> </app-experience-list>
+    </section>
+    <section id="skills-section">
+      <h2 style="text-align: center">Skills</h2>
+      <div id="skills-body">
+        <article *ngFor="let skills of skillsLists">
+          <app-skills-list
+            [title]="skills.title"
+            [skills]="skills.skills"
+          ></app-skills-list>
+        </article>
+      </div>
+    </section>
+  </div>
+</div>
+<router-outlet></router-outlet>

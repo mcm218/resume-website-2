@@ -1,0 +1,16 @@
+<header>
+  <div #header id="header-overlay">
+    <section>
+      <h1 #titleElement>{{ title }}</h1>
+      <h2 #hideOnScroll>{{ subtitle }}</h2>
+    </section>
+    <section #hideOnScrollPhone>
+      <app-contact [contact]="contact"></app-contact>
+    </section>
+    <!-- <section #hideOnScroll>
+      <app-education-card [education]="education"></app-education-card>
+    </section> -->
+    <section #hideOnScroll style="height: 2rem;"></section>
+  </div>
+</header>
+<div #header_offset id="header-offset"></div>

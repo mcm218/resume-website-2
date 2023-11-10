@@ -1,0 +1,43 @@
+<section
+  class="experience-card"
+  [ngClass]="IsInFilter() ? 'displayed' : 'hidden'"
+>
+  <div class="experience-primary">
+    <h3 style="display: inline">{{ this.item.role }}</h3>
+    <p class="company" style="float: right" *ngIf="this.item.company">
+      {{ this.item.company }}
+    </p>
+  </div>
+  <div
+    class="experience-secondary"
+    *ngIf="this.item.startDate || this.item.location"
+  >
+    <span class="dates" *ngIf="this.item.startDate"
+      >{{ this.item.startDate }} - {{ this.item.endDate }}
+    </span>
+    <span class="location" style="float: right">{{ this.item.location }}</span>
+  </div>
+  <div style="display: flex; align-items: center">
+    <span
+      class="filterItem"
+      (click)="this.ToggleFilterItem(item)"
+      [ngClass]="CheckFlag(item) ? 'filterItem-selected' : 'filterItem'"
+      *ngFor="let item of this.filterObjects"
+    >
+      <fa-icon
+        *ngIf="item.isFA; else elseBlock"
+        [icon]="item.faIcon"
+        size="2x"
+        >{{ item.filterName }}</fa-icon
+      >
+      <ng-template #elseBlock>
+        <app-svg-renderer [title]="item.iconURI"></app-svg-renderer>
+      </ng-template>
+    </span>
+  </div>
+  <ul>
+    <li *ngFor="let description of this.item.notes">
+      <div [innerHTML]="description"></div>
+    </li>
+  </ul>
+</section>

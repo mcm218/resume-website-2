@@ -1,0 +1,98 @@
+@mixin alpha($property, $color-variable, $opacity) {
+    $color-variable-h: var(#{$color-variable + "-h"});
+    $color-variable-s: var(#{$color-variable + "-s"});
+    $color-variable-l: var(#{$color-variable + "-l"});
+    #{$property}: hsla(
+      $color-variable-h,
+      $color-variable-s,
+      $color-variable-l,
+      $opacity
+    );
+  }
+
+#filter-toolbar-container {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    transform: translate(0%, -50%);
+    display: flex;
+}
+
+.expanded {
+    left: 16px;
+    transition: left 0.25s ease;
+}
+
+.hidden {
+    left: -70px;
+    transition: left 0.25s ease;
+}
+
+#filter-toolbar-container > * {
+    background-color: rgba(0,0,0,0.7);
+}
+
+#filter-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    
+    padding: 20px 10px;
+    border-radius: 10px;
+
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+#filter-toolbar::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+#filter-toolbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#filter-handle {
+    height: 50px;
+    width: 20px;
+    align-self: center;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+
+.filterItem,
+.filterItem-selected {
+  margin: 0 5px;
+  fill: currentColor;
+}
+
+.filterItem {
+    color: var(--gray);
+    transition: color 0.5s ease;
+  }
+  .filterItem:hover {
+    @include alpha(color, --gray, 0.7);
+    transition: color 0.25s ease;
+  }
+
+  .filterItem-selected {
+    color: var(--blue);
+    transition: color 0.5s ease;
+  }
+
+  .filterItem-selected:hover {
+    @include alpha(color, --blue, 0.7);
+    transition: color 0.25s ease;
+  }
+
+  // Phone Styling
+  @media screen and (max-width: 600px) {
+    #filter-toolbar-container > * {
+        background-color: rgb(0,0,0);
+    }
+  }

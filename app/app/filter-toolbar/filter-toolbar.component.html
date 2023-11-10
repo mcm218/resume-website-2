@@ -1,0 +1,33 @@
+<!-- 
+    TODO:
+    - fuck mobile :/
+ -->
+
+
+<div id="filter-toolbar-container" [ngClass]="isExpanded ? 'expanded' : 'hidden'">
+    <div id="filter-toolbar">
+        <span
+          class="filterItem"
+          (click)="this.ToggleFilterItem(item)"
+          [ngClass]="CheckFlag(item) ? 'filterItem-selected' : 'filterItem'"
+          *ngFor="let item of this.filterObjects"
+          matTooltipPosition="right"
+        >
+          <fa-icon
+            *ngIf="item.isFA; else elseBlock"
+            [icon]="item.faIcon"
+            size="2x"
+            >{{ item.filterName }}</fa-icon
+          >
+          <ng-template #elseBlock>
+            <app-svg-renderer [title]="item.iconURI"></app-svg-renderer>
+          </ng-template>
+        </span>
+    </div>
+    <div id="filter-handle" (click)="ToggleExpanded ()">
+        <fa-icon *ngIf="isExpanded" [icon]="faChevronLeft"></fa-icon>
+        <fa-icon *ngIf="isExpanded === false" [icon]="faChevronRight"></fa-icon>
+    </div>
+</div>
+
+
