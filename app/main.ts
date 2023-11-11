@@ -32,5 +32,4 @@ enableProdMode();
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  .then((success) => console.error(`Hello Sentry`))
   .catch(err => console.error(err));

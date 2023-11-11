@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faDeafness, faFill } from '@fortawesome/free-solid-svg-icons';
-import { FilterItem } from './models/filter-item';
+import { FilterItem } from '../models/filter-item';
 
 @Injectable({
   providedIn: 'root',

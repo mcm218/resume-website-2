@@ -15,7 +15,7 @@ import {
   faChevronLeft,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
-import { FilterIconPair, FilterService } from '../filter.service';
+import { FilterIconPair, FilterService } from '../services/filter.service';
 import { FilterItem } from '../models/filter-item';
 
 @Component({

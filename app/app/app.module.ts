@@ -26,6 +26,7 @@ import {
 } from '@angular/fire/analytics';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FilterToolbarComponent } from './filter-toolbar/filter-toolbar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import { FilterToolbarComponent } from './filter-toolbar/filter-toolbar.componen
         AppRoutingModule,
         FontAwesomeModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         // provideAnalytics(() => getAnalytics()),
         provideFirestore(() => getFirestore()),

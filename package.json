@@ -3,16 +3,18 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts",
+    "dev:app": "ng serve --open",
+    "build:api": "tsc -p tsc -p tsconfig.api.json",
+    "start:api": "node ./api.dist/index.js",
+    "dev:api": "nodemon --watch api --exec \"npm run build:api && npm run start:api\"",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && fly deploy && bun run sentry:sourcemaps",
+    "build": "ng build && fly deploy && npm run sentry:sourcemaps",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org personal-03r --project resume-website ./dist/resume-website && sentry-cli sourcemaps upload --org personal-03r --project resume-website ./dist/resume-website"
   },
   "dependencies": {
-    "elysia": "latest",
     "@angular/animations": "~17.0.2",
     "@angular/cdk": "^17.0.0",
     "@angular/common": "~17.0.2",
@@ -30,14 +32,18 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@sentry/angular-ivy": "^7.76.0",
-    "karma-viewport": "^1.0.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.17.1",
+    "firebase-admin": "^11.11.0",
     "moment": "^2.29.4",
+    "nodemon": "^3.0.1",
     "rxjs": "~6.6.0",
+    "ts-node": "^10.9.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "bun-types": "latest",
     "@angular-devkit/build-angular": "~17.0.0",
     "@angular-eslint/builder": "17.0.1",
     "@angular-eslint/eslint-plugin": "17.0.1",
@@ -56,8 +62,9 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~5.2.2"
+    "typescript": "^5.2.2",
+    "@types/express": "^4.17.11",
+    "@types/node": "^16.11.7"
   },
-  "module": "src/index.js",
   "private": true
 }

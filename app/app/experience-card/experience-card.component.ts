@@ -17,7 +17,7 @@ import {
   faFill,
   faFillDrip,
 } from '@fortawesome/free-solid-svg-icons';
-import { FilterIconPair, FilterService } from '../filter.service';
+import { FilterIconPair, FilterService } from '../services/filter.service';
 import { ExperienceItem } from '../models/experience-item';
 import { FilterItem } from '../models/filter-item';
 

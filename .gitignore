@@ -44,6 +44,7 @@ package-lock.json
 
 # compiled output
 /dist
+/api.dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -99,3 +100,4 @@ Thumbs.db
 .sentryclirc
 
 **/environment*
+*.env

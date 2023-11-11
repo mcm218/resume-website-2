@@ -17,10 +17,9 @@ import {
     faThinkPeaks,
     faUnity,
 } from '@fortawesome/free-brands-svg-icons';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
-import JsonData from '../assets/me.json';
-import { FilterIconPair, FilterService } from './filter.service';
+// import JsonData from '../assets/me.json';
+import { FilterIconPair, FilterService } from './services/filter.service';
+import { ResumeService } from './services/resume.service';
 import { ContactMe } from './models/contact-me';
 import { Education } from './models/education';
 import { FilterItem } from './models/filter-item';
@@ -36,12 +35,10 @@ import moment from 'moment';
 export class AppComponent implements AfterViewInit {
     title = 'Resume';
 
-    item$: Observable<any>;
-
-    experienceList: Array<Role> = JsonData.experience;
-    skillsLists: Array<SkillBlock> = JsonData.skills;
-    contact: ContactMe = JsonData.contact;
-    education: Education = JsonData.education;
+    experienceList: Array<Role> = new Array<Role>();
+    skillsLists: Array<SkillBlock> = new Array<SkillBlock>();
+    contact: ContactMe = new ContactMe();
+    education: Education = new Education();
 
     filterObjects: Array<FilterIconPair> = new Array<FilterIconPair>();
     filterIsExpanded: boolean = true;
@@ -49,14 +46,16 @@ export class AppComponent implements AfterViewInit {
     @ViewChild('app_container') appContainerElement!: ElementRef;
     @ViewChild('mobile_underlay') mobileUnderlayElement!: ElementRef;
 
-    constructor(firestore: Firestore, private sanitizer: DomSanitizer) {
+    loadResume(resumeService: ResumeService, id: string) {
+        return resumeService.getResume(id);
+    }
+
+    constructor(firestore: Firestore, resumeService: ResumeService) {
         if (window.innerWidth < 600) {
             this.filterIsExpanded = false;
         }
 
-        const docRef = doc(firestore, 'resumes/krtYPHqlrLLVzPVV9R69'); //collection(firestore, 'resumes');
-        this.item$ = docData(docRef);
-        this.item$.subscribe((value) => {
+        this.loadResume(resumeService, 'krtYPHqlrLLVzPVV9R69').subscribe((value: any) => {
             if (!value) {
                 return;
             }
@@ -80,8 +79,6 @@ export class AppComponent implements AfterViewInit {
                     });
                 });
             }
-
-            console.log(value);
 
             this.experienceList = value.experience;
             this.skillsLists = value.skills;

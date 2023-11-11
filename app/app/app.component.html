@@ -15,7 +15,8 @@
     <section *ngFor="let item of this.experienceList">
       <app-experience-list [role]="item"> </app-experience-list>
     </section>
-    <section id="skills-section">
+
+    <section id="skills-section" *ngIf="this.skillsLists.length">
       <h2 style="text-align: center">Skills</h2>
       <div id="skills-body">
         <article *ngFor="let skills of skillsLists">
