@@ -4,12 +4,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:app": "ng serve --open",
-    "build:api": "tsc -p tsc -p tsconfig.api.json",
-    "start:api": "node ./api.dist/index.js",
+    "build:api": "tsc -p tsconfig.api.json",
+    "start:api": "node ./api/dist/index.js",
     "dev:api": "nodemon --watch api --exec \"npm run build:api && npm run start:api\"",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && fly deploy && npm run sentry:sourcemaps",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org personal-03r --project resume-website ./dist/resume-website && sentry-cli sourcemaps upload --org personal-03r --project resume-website ./dist/resume-website"
@@ -20,7 +20,6 @@
     "@angular/common": "~17.0.2",
     "@angular/compiler": "~17.0.2",
     "@angular/core": "~17.0.2",
-    "@angular/fire": "^16.0.0",
     "@angular/forms": "~17.0.2",
     "@angular/material": "^17.0.0",
     "@angular/platform-browser": "~17.0.2",
@@ -38,6 +37,7 @@
     "firebase-admin": "^11.11.0",
     "moment": "^2.29.4",
     "nodemon": "^3.0.1",
+    "prerender-node": "^3.7.0",
     "rxjs": "~6.6.0",
     "ts-node": "^10.9.1",
     "tslib": "^2.3.0",
@@ -52,7 +52,9 @@
     "@angular-eslint/template-parser": "17.0.1",
     "@angular/cli": "~17.0.0",
     "@angular/compiler-cli": "~17.0.2",
+    "@types/express": "^4.17.11",
     "@types/jasmine": "~3.8.0",
+    "@types/node": "^16.11.7",
     "@typescript-eslint/eslint-plugin": "6.10.0",
     "@typescript-eslint/parser": "6.10.0",
     "eslint": "^8.53.0",
@@ -62,9 +64,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "^5.2.2",
-    "@types/express": "^4.17.11",
-    "@types/node": "^16.11.7"
+    "typescript": "^5.2.2"
   },
   "private": true
 }

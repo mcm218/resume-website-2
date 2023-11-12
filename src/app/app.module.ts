@@ -16,15 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WipAlertComponent } from './wip-alert/wip-alert.component';
 import { SvgRendererComponent } from './svg-renderer/svg-renderer.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import {
-    provideAnalytics,
-    getAnalytics,
-    ScreenTrackingService,
-    UserTrackingService,
-} from '@angular/fire/analytics';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FilterToolbarComponent } from './filter-toolbar/filter-toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -48,10 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
         AppRoutingModule,
         FontAwesomeModule,
         BrowserAnimationsModule,
-        HttpClientModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        // provideAnalytics(() => getAnalytics()),
-        provideFirestore(() => getFirestore()),
+        HttpClientModule
     ],
     providers: [
         {
@@ -68,9 +57,7 @@ import { HttpClientModule } from '@angular/common/http';
             useFactory: () => () => {},
             deps: [Sentry.TraceService],
             multi: true,
-        },
-        ScreenTrackingService,
-        UserTrackingService,
+        }
     ],
     bootstrap: [AppComponent],
 })

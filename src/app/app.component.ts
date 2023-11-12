@@ -1,12 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import {
-    addDoc,
-    collectionData,
-    doc,
-    docData,
-    Firestore,
-} from '@angular/fire/firestore';
-import {
     faAngular,
     faCss3,
     faHtml5,
@@ -14,7 +7,6 @@ import {
     faNode,
     faReact,
     faSalesforce,
-    faThinkPeaks,
     faUnity,
 } from '@fortawesome/free-brands-svg-icons';
 // import JsonData from '../assets/me.json';
@@ -50,7 +42,7 @@ export class AppComponent implements AfterViewInit {
         return resumeService.getResume(id);
     }
 
-    constructor(firestore: Firestore, resumeService: ResumeService) {
+    constructor(resumeService: ResumeService) {
         if (window.innerWidth < 600) {
             this.filterIsExpanded = false;
         }

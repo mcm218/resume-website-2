@@ -43,8 +43,8 @@ package-lock.json
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/api.dist
+**/dist/*
+**/api.dist/*
 /tmp
 /out-tsc
 # Only exists if Bazel was run

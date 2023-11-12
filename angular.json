@@ -20,25 +20,25 @@
         }
       },
       "root": "",
-      "sourceRoot": "app",
+      "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/resume-website",
-            "index": "app/index.html",
-            "main": "app/main.ts",
-            "polyfills": "app/polyfills.ts",
+            "outputPath": "src/dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "app/favicon.ico",
-              "app/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "app/styles.scss"
+              "src/styles.scss"
             ],
             "sourceMap": true,
             "scripts": []
@@ -59,8 +59,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "app/environments/environment.ts",
-                  "with": "app/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -97,18 +97,18 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "app/test.ts",
-            "polyfills": "app/polyfills.ts",
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "app/favicon.ico",
-              "app/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "app/styles.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -117,8 +117,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "app/**/*.ts",
-              "app/**/*.html"
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         }

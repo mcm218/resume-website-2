@@ -26,7 +26,7 @@
 
         /* Modules */
         "module": "CommonJS", // Use CommonJS modules, which is the standard for Node.js
-        "outDir": "./api.dist", // Directory to output the compiled JS files
+        "outDir": "./api/dist", // Directory to output the compiled JS files
         "rootDir": "./api", // Root directory of your
         // "rootDir": "./",                                  /* Specify the root folder within your source files. */
         "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
@@ -35,7 +35,6 @@
         // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
         // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
         "types": [
-            "bun-types"
         ] /* Specify type package names to be included without being referenced in a source file. */,
         // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
         // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */

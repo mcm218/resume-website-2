@@ -7,18 +7,6 @@ import { WipAlertComponent } from './wip-alert/wip-alert.component';
 import JsonData from '../assets/me.json';
 import { environment } from '../environments/environment.js';
 
-import {
-  addDoc,
-  collectionData,
-  doc,
-  docData,
-  Firestore,
-  FirestoreModule,
-  getFirestore,
-  provideFirestore,
-} from '@angular/fire/firestore';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-
 declare const viewport: any;
 
 describe('AppComponent', () => {
@@ -30,8 +18,6 @@ describe('AppComponent', () => {
       declarations: [AppComponent],
       imports: [
         RouterTestingModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideFirestore(() => getFirestore()),
       ],
     }).compileComponents();
   });

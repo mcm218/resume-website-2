@@ -1,9 +1,18 @@
+import dotenv from 'dotenv';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import admin from 'firebase-admin';
 import path from 'path';
+import admin from 'firebase-admin';
+//@ts-ignore
+import prerender from 'prerender-node';
+dotenv.config();
 
 //@ts-ignore
+if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
+    console.error('FIREBASE_SERVICE_ACCOUNT environment variable not set');
+    process.exit(1);
+}
+
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
@@ -12,7 +21,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const app = express();
-const dirname = path.dirname("../dist/resume-website/index.html");
+app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN || ''));
 
 // Swagger setup can be added here if needed
 
@@ -46,8 +55,9 @@ app.get('/api/resumes/:id', async (req: Request, res: Response) => {
 });
 
 // Serve Angular app for all non-API routes
+app.use(express.static(path.join(__dirname, '../../src/dist')));
 app.get('/*', (req: Request, res: Response) => {
-    res.sendFile(path.join(dirname, '../dist/resume-website/index.html'));
+    res.sendFile(path.join(__dirname, '../../src/dist/index.html'));
 });
 
 // Start server

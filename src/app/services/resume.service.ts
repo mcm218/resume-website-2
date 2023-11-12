@@ -12,6 +12,6 @@ export class ResumeService {
 
     getResume(id: string) {
         // Make call to /api/resumes/:id
-        return this.http.get(`http://localhost:3000/api/resumes/${id}`);
+        return this.http.get(`/api/resumes/${id}`);
     }
 }
