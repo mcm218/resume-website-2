@@ -9,7 +9,6 @@ dotenv.config();
 
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
-import packageJSON from "../package.json";
 
 
 //@ts-ignore
@@ -28,7 +27,6 @@ const db = admin.firestore();
 const app = express();
 app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN || ''));
 Sentry.init({
-    release: 'resume-website@' + packageJSON.version,
     dsn: 'https://953f62f29e44de26fab8242656793fa5@o4506140418441216.ingest.sentry.io/4506140429516800',
     integrations: [
         // enable HTTP calls tracing
