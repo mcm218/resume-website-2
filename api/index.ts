@@ -7,8 +7,9 @@ import admin from 'firebase-admin';
 import prerender from 'prerender-node';
 dotenv.config();
 
-import * as Sentry from "@sentry/node";
-import { ProfilingIntegration } from "@sentry/profiling-node";
+import * as Sentry from '@sentry/node';
+import { ProfilingIntegration } from '@sentry/profiling-node';
+import packageJSON from "../package.json";
 
 
 //@ts-ignore
@@ -27,18 +28,19 @@ const db = admin.firestore();
 const app = express();
 app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN || ''));
 Sentry.init({
-  dsn: 'https://bdf5ec4781fa15f23b0d2c70e355e408@o4506140418441216.ingest.sentry.io/4506215894876160',
-  integrations: [
-    // enable HTTP calls tracing
-    new Sentry.Integrations.Http({ tracing: true }),
-    // enable Express.js middleware tracing
-    new Sentry.Integrations.Express({ app }),
-    new ProfilingIntegration(),
-  ],
-  // Performance Monitoring
-  tracesSampleRate: 1.0,
-  // Set sampling rate for profiling - this is relative to tracesSampleRate
-  profilesSampleRate: 1.0,
+    release: 'resume-website@' + packageJSON.version,
+    dsn: 'https://953f62f29e44de26fab8242656793fa5@o4506140418441216.ingest.sentry.io/4506140429516800',
+    integrations: [
+        // enable HTTP calls tracing
+        new Sentry.Integrations.Http({ tracing: true }),
+        // enable Express.js middleware tracing
+        new Sentry.Integrations.Express({ app }),
+        new ProfilingIntegration(),
+    ],
+    // Performance Monitoring
+    tracesSampleRate: 1.0,
+    // Set sampling rate for profiling - this is relative to tracesSampleRate
+    profilesSampleRate: 1.0,
 });
 
 app.use(Sentry.Handlers.requestHandler());
