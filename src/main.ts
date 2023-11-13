@@ -16,7 +16,7 @@ Sentry.init({
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
-      tracePropagationTargets: ["localhost", "https://wild-sun-3772.fly.dev/", "https://michaelcmuniz.com", "https://resume.michaelcmuniz.com"],
+      tracePropagationTargets: ["https://wild-sun-3772.fly.dev/", "https://michaelcmuniz.com", "https://resume.michaelcmuniz.com"],
       routingInstrumentation: Sentry.routingInstrumentation,
     }),
     new Sentry.Replay(),

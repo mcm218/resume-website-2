@@ -7,6 +7,10 @@ import admin from 'firebase-admin';
 import prerender from 'prerender-node';
 dotenv.config();
 
+import * as Sentry from "@sentry/node";
+
+
+
 //@ts-ignore
 if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
     console.error('FIREBASE_SERVICE_ACCOUNT environment variable not set');
@@ -22,20 +26,31 @@ admin.initializeApp({
 const db = admin.firestore();
 const app = express();
 app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN || ''));
+Sentry.init({
+  dsn: 'https://bdf5ec4781fa15f23b0d2c70e355e408@o4506140418441216.ingest.sentry.io/4506215894876160',
+  integrations: [
+    // enable HTTP calls tracing
+    new Sentry.Integrations.Http({ tracing: true }),
+    // enable Express.js middleware tracing
+    new Sentry.Integrations.Express({ app }),
+    new ProfilingIntegration(),
+  ],
+  // Performance Monitoring
+  tracesSampleRate: 1.0,
+  // Set sampling rate for profiling - this is relative to tracesSampleRate
+  profilesSampleRate: 1.0,
+});
+
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
 
 // Swagger setup can be added here if needed
 
 app.use(express.json()); // For parsing application/json
 app.use(cors());
 
-// Custom error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(err);
-    res.status(500).send(err.message || 'Internal Server Error');
-});
-
 // API Routes
-app.get('/api', (req: Request, res: Response) => {
+app.get('/api', (_req: Request, res: Response) => {
     res.send('Hello from Express');
 });
 
@@ -54,9 +69,11 @@ app.get('/api/resumes/:id', async (req: Request, res: Response) => {
     }
 });
 
+app.use(Sentry.Handlers.errorHandler());
+
 // Serve Angular app for all non-API routes
 app.use(express.static(path.join(__dirname, '../../src/dist')));
-app.get('/*', (req: Request, res: Response) => {
+app.get('/*', (_req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '../../src/dist/index.html'));
 });
 
