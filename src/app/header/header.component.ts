@@ -79,10 +79,10 @@ export class HeaderComponent implements AfterViewChecked {
       let headerNativeElement = this.headerElement.nativeElement;
 
       this.headerValues.initialMobileValue =
-      document.querySelector<HTMLElement>('header')!.offsetHeight;
+       299.5;//document.querySelector<HTMLElement>('header')!.offsetHeight;
 
       this.headerValues.initialDesktopValue =
-        document.querySelector<HTMLElement>('header')!.offsetHeight;
+        144.5;//document.querySelector<HTMLElement>('header')!.offsetHeight;
 
       // Update the height of the offset element
       this.offsetElement.nativeElement.style.height =
