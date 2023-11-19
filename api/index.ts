@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
-import admin from 'firebase-admin';
 //@ts-ignore
 import prerender from 'prerender-node';
 dotenv.config();
@@ -10,20 +9,23 @@ dotenv.config();
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 
+import { drizzle } from 'drizzle-orm/libsql';
+import { createClient } from '@libsql/client';
+import * as schema from "./drizzle/schema";
+import { eq } from 'drizzle-orm';
 
-//@ts-ignore
-if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
-    console.error('FIREBASE_SERVICE_ACCOUNT environment variable not set');
+if (!process.env.TURSO_TOKEN || !process.env.TURSO_URL) {
+    console.error('TURSO_TOKEN environment variable not set');
     process.exit(1);
 }
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+const client = createClient({
+    url: process.env.TURSO_URL,
+    authToken: process.env.TURSO_TOKEN,
 });
 
-const db = admin.firestore();
+const db = drizzle(client, { schema });
+
 const app = express();
 app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN || ''));
 Sentry.init({
@@ -57,12 +59,15 @@ app.get('/api', (_req: Request, res: Response) => {
 app.get('/api/resumes/:id', async (req: Request, res: Response) => {
     const id = req.params.id;
     try {
-        const doc = await db.collection('resumes').doc(id).get();
-        if (!doc.exists) {
-            res.status(404).send('Resume not found');
-        } else {
-            res.json(doc.data());
+        const existingResume = await db.query.resumes.findFirst({
+            where: eq(schema.resumes.id, id),
+        });
+
+        if (!existingResume) {
+            return res.status(404).send('Resume not found');
         }
+
+        return res.json(existingResume);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving resume');
