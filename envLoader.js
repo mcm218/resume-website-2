@@ -3,8 +3,8 @@ var fs = require('fs');
 var path = require('path');
 
 var dir = "src/environments";
-var file = "environment.ts";
-var prodFile = "environment.prod.ts"; // For production deployment
+var file = "environment.js";
+var prodFile = "environment.prod.js"; // For production deployment
 
 var content = process.env.ENVIRONMENT_DETAILS;
 
