@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: node envLodaer.ts
+        env:
+            ENVIRONMENT_DETAILS: '${{ secrets.ENVIRONMENT_DETAILS }}'
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
