@@ -4,11 +4,11 @@ import * as Sentry from "@sentry/angular-ivy";
 import { AppModule } from './app/app.module';
 import packageJSON from "../package.json";
 
-// import { environment } from './environments/environment.js';
+import { environment } from './environments/environment.js';
 
-// if (environment.production) {
-//   enableProdMode();
-// }
+if (environment.production) {
+  enableProdMode();
+}
 
 Sentry.init({
   release: "resume-website@" + packageJSON.version,
