@@ -4,7 +4,7 @@ import * as Sentry from "@sentry/angular-ivy";
 import { AppModule } from './app/app.module';
 import packageJSON from "../package.json";
 
-import { environment } from '../environment.js';
+import { environment } from './environments/environment.js';
 
 if (environment.production) {
   enableProdMode();
