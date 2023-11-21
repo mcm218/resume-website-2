@@ -8,7 +8,8 @@ import { environment } from '../../environments/environment';
 export class ResumeService {
     http: HttpClient;
 
-    private apiUrl = environment.apiUrl;
+    //@ts-ignore
+    private apiUrl = environment.apiUrl || environment.API_URL;
 
     constructor(http: HttpClient) {
         this.http = http;

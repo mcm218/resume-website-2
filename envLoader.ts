@@ -1,14 +1,14 @@
 /* server.js in root directory */
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
-var dir = "src/environments";
-var file = "environment.ts";
+const dir = "src/environments";
+const file = "environment.ts";
 var prodFile = "environment.prod.ts"; // For production deployment
 
-var content = process.env.ENVIRONMENT_DETAILS;
+const content = process.env.ENVIRONMENT_DETAILS;
 
-fs.access(dir, fs.constants.F_OK, function (err) {
+fs.access(dir, fs.constants.F_OK, function (err: any) {
     if (err) {
         // Directory doesn't exist
         console.log("src doesn't exist, creating now", process.cwd());
@@ -28,7 +28,7 @@ fs.access(dir, fs.constants.F_OK, function (err) {
         console.log("Created successfully in", process.cwd());
         if (fs.existsSync(dir + "/" + file)) {
             console.log("File is created", path.resolve(dir + "/" + file));
-            var str = fs.readFileSync(dir + "/" + file).toString();
+            const str = fs.readFileSync(dir + "/" + file).toString();
             console.log(str);
         }
     } catch (error) {
