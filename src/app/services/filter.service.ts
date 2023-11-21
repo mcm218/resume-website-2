@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faDeafness, faFill } from '@fortawesome/free-solid-svg-icons';
 import { FilterItem } from '../models/filter-item';
-
+import mixpanel from 'mixpanel-browser';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,6 +16,10 @@ export class FilterService {
   static ToggleFilterItem(filterItem: FilterIconPair) {
     // Is the filter already selected?
     FilterService.CurrentFilters ^= filterItem.value;
+    mixpanel.track('Filter Toggled', {
+        filterName: filterItem.filterName,
+        isFilterSelected: (FilterService.CurrentFilters & filterItem.value) > 0,
+    });
   }
 }
 

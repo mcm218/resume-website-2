@@ -18,6 +18,7 @@ import { FilterItem } from './models/filter-item';
 import { Role } from './models/role';
 import { SkillBlock } from './models/skill-block';
 import moment from 'moment';
+import mixpanel from 'mixpanel-browser';
 
 @Component({
     selector: 'app-root',
@@ -43,6 +44,7 @@ export class AppComponent implements AfterViewInit {
     }
 
     constructor(resumeService: ResumeService) {
+        mixpanel.init('ae047a879c87a69536d31d54709bd365', {debug: true, track_pageview: true, persistence: 'localStorage'});
         if (window.innerWidth < 600) {
             this.filterIsExpanded = false;
         }

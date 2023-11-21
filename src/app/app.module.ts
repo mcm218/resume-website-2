@@ -16,7 +16,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WipAlertComponent } from './wip-alert/wip-alert.component';
 import { SvgRendererComponent } from './svg-renderer/svg-renderer.component';
-import { environment } from '../environments/environment';
 import { FilterToolbarComponent } from './filter-toolbar/filter-toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -57,7 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
             useFactory: () => () => {},
             deps: [Sentry.TraceService],
             multi: true,
-        }
+        },
     ],
     bootstrap: [AppComponent],
 })
