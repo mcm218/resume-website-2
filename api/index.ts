@@ -13,6 +13,8 @@ import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 import * as schema from "./drizzle/schema";
 import { eq } from 'drizzle-orm';
+import Mixpanel from 'mixpanel';
+const mixpanel = Mixpanel.init("ae047a879c87a69536d31d54709bd365");
 
 if (!process.env.TURSO_TOKEN || !process.env.TURSO_URL) {
     console.error('TURSO_TOKEN environment variable not set');
@@ -54,6 +56,19 @@ app.use(cors());
 // API Routes
 app.get('/api', (_req: Request, res: Response) => {
     res.send('Hello from Express');
+});
+
+app.post('/api/mixpanel/:event', (req: Request, res: Response) => {
+    try {
+        const event = req.params.event;
+        const data = req.body;
+        console.log(event, data);
+        mixpanel.track(event, data);
+        res.send('OK');
+    } catch(err) {
+        console.error(err);
+        res.status(500).send('Error sending event to Mixpanel');
+    }
 });
 
 app.get('/api/resumes/:id', async (req: Request, res: Response) => {
