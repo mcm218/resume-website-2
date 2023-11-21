@@ -24,7 +24,6 @@ jobs:
           echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env.prod
       - name: create environment file
         run: |
-          mkdir src
           mkdir src/environments
           touch src/environments/environment.ts
           touch src/environments/environment.prod.ts
