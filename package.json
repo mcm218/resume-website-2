@@ -10,7 +10,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
-        "config": "node envLoader.ts",
+        "config": "node envLoader.js",
         "deploy": "npm run sentry:sourcemaps & fly deploy",
         "watch": "ng build --watch --configuration development",
         "lint": "ng lint",
