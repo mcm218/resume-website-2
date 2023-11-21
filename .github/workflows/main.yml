@@ -22,11 +22,9 @@ jobs:
           touch .env.prod
           echo API_URL=${{ secrets.API_URL }} >> .env.prod
           echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env.prod
-      - name: create environment file
+      - name: create environment directory
         run: |
           mkdir src/environments
-          touch src/environments/environment.ts
-          touch src/environments/environment.prod.ts
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
