@@ -24,8 +24,8 @@ jobs:
           echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env.prod
       - name: create env fil
         run: |
-          touch ./src/environments/environment.ts
-          touch ./src/environments/environment.prod.ts
+          touch app/src/environments/environment.ts
+          touch app/src/environments/environment.prod.ts
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
