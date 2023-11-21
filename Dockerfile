@@ -14,6 +14,8 @@ RUN npm install
 
 COPY . .
 
+RUN npm run config
+
 # Build stage for Angular app
 # Change directory to 'src', build it, and then change back to '/app'
 RUN npm run build
