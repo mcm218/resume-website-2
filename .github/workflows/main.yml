@@ -12,6 +12,11 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
         env:
             ENVIRONMENT_DETAILS: '${{ secrets.ENVIRONMENT_DETAILS }}'
+      - name: create env file
+        run: |
+          touch .env
+          echo API_URL=${{ secrets.API_URL }} >> .env
+          echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
