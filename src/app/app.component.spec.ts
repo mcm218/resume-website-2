@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { WipAlertComponent } from './wip-alert/wip-alert.component';
 import JsonData from '../assets/me.json';
-import { environment } from '../environments/environment.js';
+import { environment } from '../../environment.js/index.js';
 
 declare const viewport: any;
 
