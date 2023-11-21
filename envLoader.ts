@@ -26,7 +26,8 @@ const dotenv = require('dotenv');
 //     }
 // });
 
-const prodTargetPath = './src/environments/environment.prod.ts';
+const prodTargetPath = __dirname + '/src/environments/environment.prod.ts';
+console.log(__dirname);
 dotenv.config({ path: '.env.prod' });
 const prodEnvConfigFile = `export const environment = {
     apiUrl: '${process.env.API_URL}',
