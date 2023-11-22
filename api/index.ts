@@ -53,6 +53,12 @@ app.use(Sentry.Handlers.tracingHandler());
 app.use(express.json()); // For parsing application/json
 app.use(cors());
 
+app.use((_req: Request, res: Response, next: NextFunction) => {
+    // Log the request path to the console
+    console.log('Request:', res.statusCode, _req.path);
+    next();
+});
+
 // API Routes
 app.get('/api', (_req: Request, res: Response) => {
     res.send('Hello from Express');
@@ -64,7 +70,7 @@ app.post('/api/mixpanel/:event', (req: Request, res: Response) => {
         const data = req.body;
         console.log(event, data);
         mixpanel.track(event, data);
-        res.send('OK');
+        res.status(200).json();
     } catch(err) {
         console.error(err);
         res.status(500).send('Error sending event to Mixpanel');

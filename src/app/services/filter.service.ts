@@ -19,11 +19,11 @@ export class FilterService {
 
   static async ToggleFilterItem(filterItem: FilterIconPair) {
     // Is the filter already selected?
-    FilterService.CurrentFilters ^= filterItem.value;
-    await this.mixpanel.track('Filter Toggled', {
-        filterName: filterItem.filterName,
-        isFilterSelected: (FilterService.CurrentFilters & filterItem.value) > 0,
-    });
+      FilterService.CurrentFilters ^= filterItem.value;
+        await this.mixpanel.track('Filter Toggled', {
+            filterName: filterItem.filterName,
+            isFilterSelected: (FilterService.CurrentFilters & filterItem.value) > 0,
+        }).toPromise();
   }
 }
 

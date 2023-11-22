@@ -15,7 +15,7 @@ export class MixpanelService {
         this.http = http;
     }
 
-    async track(event: string, data: any) {
-        return await this.http.post(`${this.apiUrl}/api/mixpanel/${event}`, data);
+    track(mixpanelEvent: string, data: any) {
+        return this.http.post(`${this.apiUrl}/api/mixpanel/${mixpanelEvent.replace(" ", "")}`, data);
     }
 }
