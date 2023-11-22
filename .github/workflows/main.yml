@@ -17,6 +17,9 @@ jobs:
           touch .env
           echo API_URL=${{ secrets.API_URL }} >> .env
           echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env
+          echo PRERENDER_TOKEN=${{ secrets.PRERENDER_TOKEN }} >> .env
+          echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env
+          echo TURSO_URL=${{ secrets.TURSO_URL }} >> .env
       - name: create env.prod file
         run: |
           touch .env.prod
