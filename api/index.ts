@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express, { Request, Response, NextFunction } from 'express';
+import UAParser from 'ua-parser-js';
 import cors from 'cors';
 import path from 'path';
 //@ts-ignore
@@ -67,8 +68,7 @@ app.get('/api', (_req: Request, res: Response) => {
 app.post('/api/mixpanel/:event', (req: Request, res: Response) => {
     try {
         const event = req.params.event;
-        const data = req.body;
-        console.log(event, data);
+        const data = createMixpanelParams(req, req.body);
         mixpanel.track(event, data);
         res.status(200).json();
     } catch(err) {
@@ -76,6 +76,29 @@ app.post('/api/mixpanel/:event', (req: Request, res: Response) => {
         res.status(500).send('Error sending event to Mixpanel');
     }
 });
+
+
+function createMixpanelParams(req: Request, data: any) {
+    const userAgent = new UAParser(req.headers['user-agent']).getResult();
+
+    console.log(userAgent);
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
+    const params = {
+        "$distinct_id": req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+        "$browser": userAgent.browser.name,
+        "$browser_version": userAgent.browser.version,
+        "$os": userAgent.os.name,
+        "$os_version": userAgent.os.version,
+        "$referrer": req.headers['referer'],
+        "$referring_domain": req.headers['referer'],
+        "$device": `${userAgent.device.vendor}  ${userAgent.device.model}`,
+        "$ip": ip,
+        ...data,
+    };
+    return params;
+    
+}
 
 app.get('/api/resumes/:id', async (req: Request, res: Response) => {
     const id = req.params.id;
