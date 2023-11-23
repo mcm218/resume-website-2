@@ -16,8 +16,8 @@
         "watch": "ng build --watch --configuration development",
         "lint": "ng lint",
         "sentry:sourcemaps": "sentry-cli sourcemaps inject --org personal-03r --project resume-website ./dist/resume-website && sentry-cli sourcemaps upload --org personal-03r --project resume-website ./dist/resume-website",
-        "generate": "drizzle-kit generate:sqlite --out ./drizzle/migrations --breakpoints --schema=./drizzle/schema.ts",
-        "migrate": "tsx drizzle/migrate"
+        "generate": "drizzle-kit generate:sqlite --out api/drizzle/migrations --breakpoints --schema=api/drizzle/schema.ts",
+        "migrate": "tsx api/drizzle/migrate"
     },
     "dependencies": {
         "@angular/animations": "~17.0.2",
