@@ -27,7 +27,7 @@ RUN npm run build:api
 # Final stage for app image
 # FROM node:${NODE_VERSION}-slim as production
 LABEL fly_launch_runtime="Node.js"
-ENV NODE_ENV=production
+ENV NODE_ENV=prod
 
 # Expose port and start the server
 EXPOSE 3000

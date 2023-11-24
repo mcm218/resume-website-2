@@ -11,15 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-        env:
-            ENVIRONMENT_DETAILS: '${{ secrets.ENVIRONMENT_DETAILS }}'
       - name: create env file
         run: |
           touch .env.staging
-          echo API_URL=${{ secrets.API_URL }} >> .env.staging
-          echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env.staging
+          echo API_URL=${{ env.API_URL }} >> .env.staging
+          echo PRODUCTION=${{ env.PRODUCTION }} >> .env.staging
           echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env.staging
-          echo TURSO_URL=${{ secrets.TURSO_URL }} >> .env.staging
+          echo TURSO_URL=${{ env.TURSO_URL }} >> .env.staging
       - name: create environment directory
         run: |
           mkdir src/environments
