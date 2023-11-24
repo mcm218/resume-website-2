@@ -1,5 +1,7 @@
 const fs = require('node:fs');
+const dotenv = require('dotenv');
 const targetPath = __dirname + '/src/environments/environment.json';
+
 dotenv.config({ path: `.env.${process.env.NODE_ENV || 'prod'}` });
 const envConfigFile = `{
     "apiUrl": "${process.env.API_URL}",
