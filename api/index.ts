@@ -5,8 +5,8 @@ import cors from 'cors';
 import path from 'path';
 //@ts-ignore
 import prerender from 'prerender-node';
-dotenv.config();
-
+console.log('NODE_ENV', process.env.NODE_ENV);;
+dotenv.config({ path: `.env.${process.env.NODE_ENV || 'prod'}`});
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 
@@ -97,7 +97,7 @@ function createMixpanelParams(req: Request, data: any) {
         ...data,
     };
     return params;
-    
+
 }
 
 app.get('/api/resumes/:id', async (req: Request, res: Response) => {

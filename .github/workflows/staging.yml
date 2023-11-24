@@ -1,8 +1,8 @@
-name: prod
+name: staging
 on:
   push:
     branches:
-      - main
+      - staging
 jobs:
   deploy:
     name: Deploy app
@@ -14,12 +14,12 @@ jobs:
             ENVIRONMENT_DETAILS: '${{ secrets.ENVIRONMENT_DETAILS }}'
       - name: create env file
         run: |
-          touch .env.prod
-          echo API_URL=${{ secrets.API_URL }} >> .env.prod
-          echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env.prod
-          echo PRERENDER_TOKEN=${{ secrets.PRERENDER_TOKEN }} >> .env.prod
-          echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env.prod
-          echo TURSO_URL=${{ secrets.TURSO_URL }} >> .env.prod
+          touch .env.staging
+          echo API_URL=${{ secrets.API_URL }} >> .env.staging
+          echo PRODUCTION=${{ secrets.PRODUCTION }} >> .env.staging
+          echo PRERENDER_TOKEN=${{ secrets.PRERENDER_TOKEN }} >> .env.staging
+          echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env.staging
+          echo TURSO_URL=${{ secrets.TURSO_URL }} >> .env.staging
       - name: create environment directory
         run: |
           mkdir src/environments
