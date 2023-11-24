@@ -7,7 +7,7 @@ let targetPath = './src/environments/environment.json';
 const dotenv = require('dotenv');
 // dotenv.config({ path: '.env' });
 // // `environment.ts` file structure
-// let envConfigFile = 
+// let envConfigFile =
 // `export const environment = {
 //     apiUrl: '${process.env.API_URL}',
 //     production: ${process.env.PRODUCTION},
@@ -28,7 +28,7 @@ const dotenv = require('dotenv');
 
 const prodTargetPath = __dirname + '/src/environments/environment.json';
 console.log(__dirname);
-dotenv.config({ path: '.env.prod' });
+dotenv.config({ path: '.env' });
 const prodEnvConfigFile = `{
     "apiUrl": "${process.env.API_URL}",
     "production": ${process.env.PRODUCTION}

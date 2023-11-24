@@ -18,6 +18,8 @@ import { WipAlertComponent } from './wip-alert/wip-alert.component';
 import { SvgRendererComponent } from './svg-renderer/svg-renderer.component';
 import { FilterToolbarComponent } from './filter-toolbar/filter-toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
         WipAlertComponent,
         SvgRendererComponent,
         FilterToolbarComponent,
+        HomeComponent,
+        AdminComponent,
     ],
     imports: [
         BrowserModule,
