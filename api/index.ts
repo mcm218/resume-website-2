@@ -30,7 +30,9 @@ const client = createClient({
 const db = drizzle(client, { schema });
 
 const app = express();
-app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN || ''));
+
+if (process.env.PRERENDER_TOKEN) { app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN || '')); }
+
 Sentry.init({
     dsn: 'https://953f62f29e44de26fab8242656793fa5@o4506140418441216.ingest.sentry.io/4506140429516800',
     integrations: [
