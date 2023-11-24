@@ -14,10 +14,10 @@ jobs:
       - name: create env file
         run: |
           touch .env.staging
-          echo API_URL=${{ $API_URL }} >> .env.staging
-          echo PRODUCTION=${{ $PRODUCTION }} >> .env.staging
+          echo API_URL=${{ vars.API_URL }} >> .env.staging
+          echo PRODUCTION=${{ vars.PRODUCTION }} >> .env.staging
           echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env.staging
-          echo TURSO_URL=${{ $TURSO_URL }} >> .env.staging
+          echo TURSO_URL=${{ vars.TURSO_URL }} >> .env.staging
       - name: create environment directory
         run: |
           mkdir src/environments

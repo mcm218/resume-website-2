@@ -14,11 +14,11 @@ jobs:
       - name: create env file
         run: |
           touch .env.prod
-          echo API_URL=${{ $API_URL }} >> .env.prod
-          echo PRODUCTION=${{ $PRODUCTION }} >> .env.prod
+          echo API_URL=${{ vars.API_URL }} >> .env.prod
+          echo PRODUCTION=${{ vars.PRODUCTION }} >> .env.prod
           echo PRERENDER_TOKEN=${{ secrets.PRERENDER_TOKEN }} >> .env.prod
           echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env.prod
-          echo TURSO_URL=${{ $TURSO_URL }} >> .env.prod
+          echo TURSO_URL=${{ vars.TURSO_URL }} >> .env.prod
       - name: create environment directory
         run: |
           mkdir src/environments
