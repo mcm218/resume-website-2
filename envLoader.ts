@@ -28,7 +28,7 @@ const dotenv = require('dotenv');
 
 const prodTargetPath = __dirname + '/src/environments/environment.json';
 console.log(__dirname);
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env.prod' });
 const prodEnvConfigFile = `{
     "apiUrl": "${process.env.API_URL}",
     "production": ${process.env.PRODUCTION}
