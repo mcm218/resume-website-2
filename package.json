@@ -10,7 +10,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
-        "config": "NODE_ENV=prod ts-node envLoader.prod.ts",
+        "config": "NODE_ENV=prod ts-node envLoader.ts",
         "config:dev": "NODE_ENV=dev ts-node envLoader.ts",
         "config:staging": "NODE_ENV=staging ts-node envLoader.ts",
         "config:prod": "NODE_ENV=prod ts-node envLoader.ts",
