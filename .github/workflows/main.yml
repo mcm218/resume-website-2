@@ -19,6 +19,8 @@ jobs:
           echo PRERENDER_TOKEN=${{ secrets.PRERENDER_TOKEN }} >> .env.prod
           echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env.prod
           echo TURSO_URL=${{ vars.TURSO_URL }} >> .env.prod
+          echo CLERK_PUBLIC_KEY=${{ vars.CLERK_PUBLIC_KEY }} >> .env.prod
+          echo CLERK_SECRET_KEY=${{ secrets.CLERK_SECRET_KEY }} >> .env.prod
       - name: create environment directory
         run: |
           mkdir src/environments

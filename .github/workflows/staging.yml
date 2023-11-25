@@ -18,6 +18,8 @@ jobs:
           echo PRODUCTION=${{ vars.PRODUCTION }} >> .env.staging
           echo TURSO_TOKEN=${{ secrets.TURSO_TOKEN }} >> .env.staging
           echo TURSO_URL=${{ vars.TURSO_URL }} >> .env.staging
+          echo CLERK_PUBLIC_KEY=${{ vars.CLERK_PUBLIC_KEY }} >> .env.staging
+          echo CLERK_SECRET_KEY=${{ secrets.CLERK_SECRET_KEY }} >> .env.staging
       - name: create environment directory
         run: |
           mkdir src/environments
