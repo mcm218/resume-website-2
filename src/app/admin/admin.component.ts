@@ -7,5 +7,13 @@ import { ClerkService } from '../services/clerk/clerk.service';
     styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
-  constructor(_clerk: ClerkService) {}
+    clerk;
+    constructor(clerk: ClerkService) { 
+        clerk.tryLogin();
+        this.clerk = clerk;
+    }
+
+    tryLogin() {
+        this.clerk.tryLogin();
+    }
 }

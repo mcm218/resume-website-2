@@ -20,6 +20,7 @@ import { FilterToolbarComponent } from './filter-toolbar/filter-toolbar.componen
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,7 @@ import { AdminComponent } from './admin/admin.component';
         AppRoutingModule,
         FontAwesomeModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [
         {
@@ -61,6 +62,7 @@ import { AdminComponent } from './admin/admin.component';
             deps: [Sentry.TraceService],
             multi: true,
         },
+        AuthInterceptorProvider
     ],
     bootstrap: [AppComponent],
 })

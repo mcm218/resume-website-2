@@ -5,7 +5,8 @@ const targetPath = __dirname + '/src/environments/environment.json';
 dotenv.config({ path: `.env.${process.env.NODE_ENV || 'prod'}` });
 const envConfigFile = `{
     "apiUrl": "${process.env.API_URL}",
-    "production": ${process.env.PRODUCTION}
+    "production": ${process.env.PRODUCTION},
+    "clerk": "${process.env.CLERK_PUBLIC_KEY}"
 }`;
 
 fs.writeFile(targetPath, envConfigFile, function (err: any) {

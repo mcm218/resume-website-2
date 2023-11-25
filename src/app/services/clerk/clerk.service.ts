@@ -1,47 +1,62 @@
 import { Injectable } from '@angular/core';
 import Clerk from '@clerk/clerk-js';
+import environment from '../../../environments/environment.json';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ClerkService {
     Clerk?: Clerk;
+    token?: string;
+
+    isInitialized = false;
 
     constructor() {
         try {
             let clerk = window.Clerk;
             if (!clerk) {
-                let clerk_key = 'pk_test_cHJlc2VudC10YWhyLTE2LmNsZXJrLmFjY291bnRzLmRldiQ';
+                let clerk_key = environment.clerk;
                 clerk = new Clerk(clerk_key);
             }
-           this.init(clerk);
-
+            this.Clerk = clerk;
+            clerk.load()
+                .then(() => {
+                    if (this.Clerk && this.Clerk.session) {
+                        this.Clerk.session.getToken().then((token) => {
+                            this.token = token || undefined;
+                            this.isInitialized = true;
+                        });
+                    }
+                    return;
+                }).catch((err) => {
+                    console.error('Clerk: ', err);  
+                    this.isInitialized = true;
+                });
         } catch (err) {
             console.error('Clerk: ', err);
         }
     }
 
-    async getClerk() {
-        if (!this.Clerk) {
-            let clerk_key = 'pk_test_cHJlc2VudC10YWhyLTE2LmNsZXJrLmFjY291bnRzLmRldiQ';
-            this.Clerk = new Clerk(clerk_key);
-            await this.init(this.Clerk);
-        }
-        return this.Clerk;
+    tryGetToken() {
+        if (!this.isInitialized || !this.token) {
+            return;
+        }   
+
+        return this.token;
     }
 
-    async init (clerk: Clerk) {
-        try {
-            // Load Clerk environment & session if available
-            await clerk.load();
-            if (!clerk.user) {
-                clerk.redirectToSignIn();
-                return;
-            }
 
-            clerk.redirectToHome();
-        } catch (err) {
-            console.error('Clerk: ', err);
+    tryLogin() {
+        if (!this.isInitialized || !this.Clerk) {
+            return;
         }
+
+        if (this.Clerk.user) {
+            return this.Clerk.redirectToHome();
+        }
+
+        return this.Clerk.redirectToSignIn();
     }
+
 }

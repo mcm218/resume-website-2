@@ -8,8 +8,7 @@ import environment from '../../environments/environment.json';
 export class MixpanelService {
     http: HttpClient;
 
-    //@ts-ignore
-    private apiUrl = environment.apiUrl || environment.API_URL;
+    private apiUrl = environment.apiUrl;
 
     constructor(http: HttpClient) {
         this.http = http;

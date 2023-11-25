@@ -33,6 +33,7 @@
         "@angular/platform-browser-dynamic": "~17.0.2",
         "@angular/router": "~17.0.2",
         "@clerk/clerk-js": "^4.65.1",
+        "@clerk/clerk-sdk-node": "^4.12.22",
         "@fortawesome/angular-fontawesome": "^0.14.0",
         "@fortawesome/fontawesome-svg-core": "^6.4.2",
         "@fortawesome/free-brands-svg-icons": "^6.4.2",

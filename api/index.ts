@@ -15,6 +15,9 @@ import { createClient } from '@libsql/client';
 import * as schema from "./drizzle/schema";
 import { eq } from 'drizzle-orm';
 import Mixpanel from 'mixpanel';
+import { ClerkExpressWithAuth, clerkClient, LooseAuthProp } from '@clerk/clerk-sdk-node';
+
+
 const mixpanel = Mixpanel.init("ae047a879c87a69536d31d54709bd365");
 
 if (!process.env.TURSO_TOKEN || !process.env.TURSO_URL) {
@@ -67,10 +70,11 @@ app.get('/api', (_req: Request, res: Response) => {
     res.send('Hello from Express');
 });
 
-app.post('/api/mixpanel/:event', (req: Request, res: Response) => {
+//@ts-ignore
+app.post('/api/mixpanel/:event', ClerkExpressWithAuth(), async (req: Request & LooseAuthProp, res: Response) => {
     try {
         const event = req.params.event;
-        const data = createMixpanelParams(req, req.body);
+        const data = await createMixpanelParams(req, req.body);
         mixpanel.track(event, data);
         res.status(200).json();
     } catch(err) {
@@ -80,14 +84,12 @@ app.post('/api/mixpanel/:event', (req: Request, res: Response) => {
 });
 
 
-function createMixpanelParams(req: Request, data: any) {
+async function createMixpanelParams(req: Request & LooseAuthProp, data: any) {
     const userAgent = new UAParser(req.headers['user-agent']).getResult();
-
-    console.log(userAgent);
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
     const params = {
-        "$distinct_id": req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+        "$user_id": req.auth.userId,
         "$browser": userAgent.browser.name,
         "$browser_version": userAgent.browser.version,
         "$os": userAgent.os.name,
@@ -98,6 +100,16 @@ function createMixpanelParams(req: Request, data: any) {
         "$ip": ip,
         ...data,
     };
+
+    if (req.auth.userId) {
+        const user = await clerkClient.users.getUser(req.auth.userId);
+        if (user) {
+            const name = `${(user.firstName || "")} ${(user.lastName || "")}`;
+            params["$email"] = user.emailAddresses[0].emailAddress;
+            params["$name"] = name;
+        }
+    }
+
     return params;
 
 }

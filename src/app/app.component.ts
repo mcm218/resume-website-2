@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ClerkService } from './services/clerk/clerk.service';
 
 @Component({
     selector: 'app-root',
@@ -6,5 +7,5 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    constructor() {}
+    constructor(_clerk: ClerkService) {}
 }
