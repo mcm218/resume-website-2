@@ -89,9 +89,10 @@
 .xp-card, .xp-card h3, .xp-card li, .xp-card .chip { transition: color 0.5s ease; }
 .xp-notes > li { list-style: square; }
 .xp-card .xp-notes > li:nth-child(odd) { color: var(--color-grayblue); }
-.xp-card[data-dim] { color: rgb(255 255 255 / 0.7); }
-.xp-card[data-dim] h3 { color: hsl(195 100% 49% / 0.7); }
-.xp-card[data-dim] .xp-notes > li:nth-child(odd) { color: hsl(195 85% 80% / 0.7); }
+.xp-card[data-dim] { color: rgb(255 255 255 / 0.35); }
+.xp-card[data-dim] h3 { color: hsl(195 100% 49% / 0.35); }
+.xp-card[data-dim] .xp-notes > li:nth-child(odd) { color: hsl(195 85% 80% / 0.35); }
+.xp-card[data-dim] .chip { color: hsl(0 0% 50% / 0.35); }
 .chip { color: var(--color-gray); }
 /* A card chip for a skill the visitor selected, anywhere on the page. */
 .xp-card .chip[data-on] { color: var(--color-blue); }
