@@ -1,13 +1,16 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --font-sans: var(--font-montserrat), var(--font-montserrat-body), "Helvetica Neue", sans-serif;
+  /* Two families, one weight range each: CSS matches a weight *within* the first
+     family that exists, so headings (200) and body text (300/400) must name their
+     own family first or the body faces can never be selected. */
+  --font-sans: var(--font-montserrat-body), var(--font-montserrat), 'Helvetica Neue', sans-serif;
+  --font-display: var(--font-montserrat), var(--font-montserrat-body), 'Helvetica Neue', sans-serif;
   --color-blue: hsl(195 100% 49%);
   --color-grayblue: hsl(195 85% 80%);
   --color-gray: hsl(0 0% 50%);
   --radius-card: 0.3rem;
 }
-
 
 html, body { height: 100%; }
 
@@ -19,7 +22,7 @@ body {
   font-size: 16px;
 }
 
-h1, h2, h3, h4 { letter-spacing: 0.3rem; font-weight: 200; margin: 0; }
+h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.3rem; font-weight: 200; margin: 0; }
 h1 { font-size: 4rem; }
 h2 { font-size: 2rem; }
 h3 { font-size: 1.5rem; color: var(--color-blue); }
@@ -38,5 +41,5 @@ section, aside, header { padding: 1rem; }
 
 /* Mobile layout */
 @media (max-width: 600px) {
-  .primary-column section { border-radius: 0 !important; background-color: transparent !important; }
+  .primary-column section { border-radius: 0; background-color: transparent; }
 }

@@ -90,7 +90,10 @@ optional links list. Dimmed state via `[data-dim]` CSS (white 70 %, blue 70 %, g
 
 ### Tokens (`globals.css`)
 
-`--font-sans: var(--font-montserrat), var(--font-montserrat-body), "Helvetica Neue", sans-serif`;
+`--font-sans: var(--font-montserrat-body), var(--font-montserrat), "Helvetica Neue", sans-serif`
+for body text and `--font-display` with the two swapped for headings — CSS matches a weight *within*
+the first family that exists, so a single stack led by the 200-only family made the 300/400 faces
+unreachable (found in #13);
 `--color-blue hsl(195 100% 49%)`, `--color-grayblue hsl(195 85% 80%)`, `--color-gray hsl(0 0% 50%)`,
 `--radius-card 0.3rem`; body black/white; h1 4rem, h2 2rem, h3 1.5rem blue, headings weight 200
 letter-spacing 0.3rem, p weight 300; mobile (`max-width: 600px`) sections lose radius and background.

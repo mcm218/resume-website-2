@@ -58,7 +58,8 @@ A bad date or unknown skill id fails `pnpm test` and `pnpm build`.
 
 `src/app/fonts.ts` loads three Latin-subset Montserrat weights with `next/font/local` from
 `src/app/fonts/`. Only weight 200 (the h1/h2 above the fold) is preloaded; 300/400 load on demand.
-The subsets were produced with fonttools:
+The upstream faces are Google Fonts Montserrat (the old Angular `src/assets/Montserrat/` copies went
+with the Angular tree); the subsets in `src/app/fonts/` were produced from them with fonttools:
 
 ```bash
 uvx --with brotli --from fonttools pyftsubset Montserrat-ExtraLight.ttf --unicodes="U+0000-00FF,U+2000-206F,U+2C60-2C7F" --layout-features="*" --flavor=woff2 --output-file=src/app/fonts/Montserrat-ExtraLight.subset.woff2
