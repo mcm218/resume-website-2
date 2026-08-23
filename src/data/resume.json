@@ -1,0 +1,293 @@
+{
+  "contact": {
+    "name": "Michael Muñiz",
+    "title": "Fullstack Engineer",
+    "email": "mcmuniz218@gmail.com",
+    "location": "Charlotte, NC",
+    "linkedin": "https://www.linkedin.com/in/michael-muniz-24065b159/",
+    "github": "https://github.com/mcm218"
+  },
+  "education": [
+    {
+      "degree": "B.S. in Computer Engineering",
+      "university": "Clemson University",
+      "end": "2019-12"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Professional Experience",
+      "items": [
+        {
+          "role": "Fullstack Software Engineer",
+          "company": "OpenSponsorship",
+          "location": "Remote",
+          "start": "2023-01",
+          "end": null,
+          "skills": [
+            "angular",
+            "html",
+            "css",
+            "javascript",
+            "typescript",
+            "nodejs",
+            "react",
+            "elasticsearch",
+            "react-native",
+            "rabbitmq"
+          ],
+          "notes": [
+            "Worked on web client built with Angular.JS, mobile client built with React Native, and Node.JS with MongoDB/RabbitMQ microservices",
+            "Created notification service to handle sending notifications to email, push, SMS, and Slack",
+            "Redesigned web and mobile deliverable submission system for athletes to submit Social Media posts, files, and analytics",
+            "Helped with training new developers and bringing them up to speed on the company’s platforms and microservices",
+            "Coordinated refactoring of aging Angular.JS architecture to improve developer’s efficiency",
+            "Lead push to optimize performance and improve results of complex ElasticSearch queries and created resources to teach other developers ElasticSearch"
+          ]
+        },
+        {
+          "role": "Senior Software Engineer",
+          "company": "Persistent Systems",
+          "location": "Charlotte, NC",
+          "start": "2022-01",
+          "end": "2022-08",
+          "skills": [
+            "salesforce",
+            "angular",
+            "html",
+            "css",
+            "javascript",
+            "typescript"
+          ],
+          "notes": [
+            "Lead the design and development of client's global OAuth architecture across multiple Salesforce Experience sites creating a single user experience",
+            "Worked with a client to create a developer portal allowing customers to learn and test the client's APIs through their Salesforce Experience site"
+          ]
+        },
+        {
+          "role": "Staff Software Engineer",
+          "company": "Fusion360",
+          "location": "Charlotte, NC",
+          "start": "2020-01",
+          "end": "2021-12",
+          "skills": [
+            "csharp",
+            "xamarin",
+            "angular",
+            "html",
+            "css",
+            "javascript",
+            "typescript"
+          ],
+          "notes": [
+            "Lead the Android development for a client's Xamarin mobile app and released the app to both iOS and Android platforms within 6 months",
+            "Supervised and taught Xamarin and C# to interns throughout their onboarding process",
+            "Coordinated with testers to resolve defects for apps, closing 100+ issues",
+            "Supervised and taught Xamarin and C# to interns throughout their onboarding process",
+            "Responded to user reviews and bug reports, boosting individual ratings by 3.6 stars on average",
+            "Built an in-house desktop app, using JS and Electron, for processing ICRE files improving developers efficiency"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Personal Projects",
+      "items": [
+        {
+          "role": "Automated Chess Robot",
+          "company": "Clemson University",
+          "skills": [
+            "cplusplus"
+          ],
+          "notes": [
+            "Lead the development of the computer vision system for recognizing the chess pieces and the board",
+            "Worked with one developer to design the system for controlling the motors used to move the grabber, similar to systems used in 3D printers"
+          ]
+        },
+        {
+          "role": "Computer Vision System for Automated Nerf Toy",
+          "company": "Clemson University",
+          "skills": [
+            "cplusplus"
+          ],
+          "notes": [
+            "Built the computer vision system using C++ and OpenCV for an automated nerf gun which allowed it to track and fire at moving targets using multiple fire modes"
+          ]
+        },
+        {
+          "role": "Journaling Mobile App",
+          "start": "2018-05",
+          "end": "2019-11",
+          "skills": [
+            "flutter"
+          ],
+          "notes": [
+            "Designed UI and systems to allow users to create new entries based on prompts or create reflections based on previous entries",
+            "Developed the app using Flutter and launched for both iOS and Android",
+            "Utilized Firebase to handle user authentication and data"
+          ]
+        },
+        {
+          "role": "Game Jams",
+          "skills": [
+            "csharp",
+            "unity"
+          ],
+          "notes": [
+            "Ludum Dare 54 - Theme: \"Limited Space\" - This game jam was a fun challenge where I created 'Acid Prototype Racer,' a high-speed racing game set in a neon-lit, psychedelic asteroid field. Players navigate a spacecraft through dynamic obstacles. The project emphasized modular design, allowing me to reutilize components for future development. The game was well-received for its vibrant aesthetics and arcade-like gameplay. I'm currently exploring the possibility of further development and refining the game's mechanics for a broader release.",
+            "Ludum Dare 51 - Theme: \" Every 10 Seconds\" - Third game jam overall and the first one I did solo. For this entry, I decided to make a top down game where you played as a vampire who had to suck blood every 10 seconds to stay alive. The twist was that you had to pickpocket your victim and check their blood donor card to ensure they had a compatitible blood type. Overall, I was happy with this game jam and how it turned out. Currently working on a mobile version of the game to release on both Andorid and iOS.",
+            "GMTK 2022 - Theme: \"Roll of the Dice \" - My second game jam and again I was the lead programmer and project lead. This time, we had a group with more writing experience, so we wanted to lean into that with a visual novel that follows a chimp trying to escape a jungle science facility. Unfortunately, we ended up not having enough time so we didn't have as many random encounters and the overall combat was weak.",
+            "Ludum Dare 50 - Theme: \"Delay the Inevitable\" - This was my first game jam ever. I was lead programmer and project lead working with a group of friends. We made a tower defense style game where you had to protect your son's sand castle from the ocean until mom returned with the camera."
+          ],
+          "links": [
+            {
+              "label": "Ludum Dare 54 - Theme: \"Limited Space\"",
+              "url": "https://ldjam.com/events/ludum-dare/54/acid-prototype-racer"
+            },
+            {
+              "label": "Ludum Dare 51 - Theme: \" Every 10 Seconds\"",
+              "url": "https://ldjam.com/events/ludum-dare/51/thirsty-vampire"
+            },
+            {
+              "label": "Ludum Dare 50 - Theme: \"Delay the Inevitable\"",
+              "url": "https://ldjam.com/events/ludum-dare/50/i-was-reincarnated-as-a-middle-aged-dad-protecting-his-sons-sand-castle"
+            }
+          ]
+        },
+        {
+          "role": "Discord Music Bot",
+          "skills": [
+            "angular",
+            "html",
+            "css",
+            "javascript",
+            "typescript",
+            "nodejs"
+          ],
+          "notes": [
+            "Developed a bot that utilized Discord's APIs to allow users to play music from YouTube within the server's voice channels via text commands",
+            "Designed web client to allow for easier manipulation of a Discord server's music queue and watch synced music videos in groups"
+          ]
+        }
+      ]
+    }
+  ],
+  "skillBlocks": [
+    {
+      "title": "Languages",
+      "skills": [
+        {
+          "title": "Typescript",
+          "level": 8,
+          "skill": "typescript"
+        },
+        {
+          "title": "Javascript",
+          "level": 8,
+          "skill": "javascript"
+        },
+        {
+          "title": "HTML5",
+          "level": 9,
+          "skill": "html"
+        },
+        {
+          "title": "CSS",
+          "level": 9,
+          "skill": "css"
+        },
+        {
+          "title": "C#",
+          "level": 8,
+          "skill": "csharp"
+        },
+        {
+          "title": "Aura",
+          "level": 3
+        },
+        {
+          "title": "Apex",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "title": "Frameworks/Tools",
+      "skills": [
+        {
+          "title": "Xamarin",
+          "level": 4,
+          "skill": "xamarin"
+        },
+        {
+          "title": "Salesforce Lightning",
+          "level": 6,
+          "skill": "salesforce"
+        },
+        {
+          "title": "Angular",
+          "level": 8,
+          "skill": "angular"
+        },
+        {
+          "title": "React",
+          "level": 7,
+          "skill": "react"
+        },
+        {
+          "title": "Node.js",
+          "level": 8,
+          "skill": "nodejs"
+        },
+        {
+          "title": "Unity",
+          "level": 7,
+          "skill": "unity"
+        },
+        {
+          "title": "TailwindCSS",
+          "level": 6
+        },
+        {
+          "title": "AngularJS",
+          "level": 8
+        },
+        {
+          "title": "React Native",
+          "level": 6,
+          "skill": "react-native"
+        },
+        {
+          "title": "ElasticSearch",
+          "level": 5,
+          "skill": "elasticsearch"
+        }
+      ]
+    },
+    {
+      "title": "Other",
+      "skills": [
+        {
+          "title": "Git",
+          "level": 8
+        },
+        {
+          "title": "Agile",
+          "level": 8
+        },
+        {
+          "title": "Scrum",
+          "level": 8
+        },
+        {
+          "title": "Organization",
+          "level": 9
+        },
+        {
+          "title": "Communication",
+          "level": 7
+        }
+      ]
+    }
+  ]
+}

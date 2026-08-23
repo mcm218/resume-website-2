@@ -1,0 +1,53 @@
+import { ExperienceGroupSection } from '@/components/experience';
+import { FilterToolbar } from '@/components/filter-toolbar';
+import { HeroBackground } from '@/components/hero-background';
+import { IconSprite } from '@/components/icon-sprite';
+import { SiteHeader } from '@/components/site-header';
+import { SkillsSection } from '@/components/skills';
+import { resume } from '@/data/resume';
+import { personJsonLd } from './seo';
+
+// The look shared by every section in the primary column. It lives on the
+// <section> itself so the mobile rule that strips it can find it.
+const CARD_SURFACE = 'rounded-[var(--radius-card)] bg-black/70';
+
+export default function Home() {
+  return (
+    /* pb-[200px]: the prototype's breathing room below the last section. */
+    <main className="relative isolate min-h-svh overflow-x-clip pb-[200px]">
+      <script
+        type="application/ld+json"
+        // The resume's own contact details, so search engines read the same
+        // facts the page shows.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd(resume.contact)).replace(/</g, '\\u003c'),
+        }}
+      />
+      <HeroBackground />
+      {/* Mobile gradient underlay; the Angular site sized this with screen.availHeight. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 -z-10 h-svh bg-[linear-gradient(180deg,transparent_30%,rgba(0,0,0,0.8)_80%,#000_100%)] sm:hidden"
+      />
+      <FilterToolbar />
+      <div
+        data-expanded="true"
+        className="primary-column mx-auto flex max-w-[1920px] flex-col gap-[12.5rem] px-4 transition-[padding-left] duration-250 max-sm:px-0 sm:data-[expanded=true]:pl-[102px]"
+      >
+        <SiteHeader />
+        {resume.experience.map((group, index) => (
+          <ExperienceGroupSection
+            key={group.title}
+            group={group}
+            className={`${CARD_SURFACE} ${index % 2 === 0 ? 'self-start' : 'self-end'}`}
+          />
+        ))}
+        <SkillsSection blocks={resume.skillBlocks} className={CARD_SURFACE} />
+      </div>
+      {/* Last: the sprite is 29 KB of markup, and anything before the hero delays
+          discovery of the LCP image. <use> resolves by id whenever the symbol
+          parses, so its position in the document does not matter. */}
+      <IconSprite />
+    </main>
+  );
+}

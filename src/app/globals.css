@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+@theme inline {
+  /* Two families, one weight range each: CSS matches a weight *within* the first
+     family that exists, so headings (200) and body text (300/400) must name their
+     own family first or the body faces can never be selected. */
+  --font-sans: var(--font-montserrat-body), var(--font-montserrat), 'Helvetica Neue', sans-serif;
+  --font-display: var(--font-montserrat), var(--font-montserrat-body), 'Helvetica Neue', sans-serif;
+  --color-blue: hsl(195 100% 49%);
+  --color-grayblue: hsl(195 85% 80%);
+  --color-gray: hsl(0 0% 50%);
+  --radius-card: 0.3rem;
+}
+
+/* Element defaults. In @layer base so utility classes still win over them. */
+@layer base {
+  html, body { height: 100%; }
+
+  body {
+    background: black;
+    color: white;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.3rem; font-weight: 200; margin: 0; }
+  h1 { font-size: 4rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.5rem; color: var(--color-blue); }
+  p, ul { margin: 0; }
+  p { font-weight: 300; }
+  ul { padding-left: 0; }
+  li { list-style: none; }
+  a { color: inherit; }
+
+  section, aside, header { padding: 1rem; }
+
+  /* Scrollbar (faithful to the Angular site) */
+  ::-webkit-scrollbar { width: 0.5rem; }
+  ::-webkit-scrollbar-track { background: black; }
+  ::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 0.25rem; }
+}
+
+/* ── Header: scroll-driven, zero JS ───────────────────────────────────── */
+/* Angular animated the bar from scroll handlers: height 144.5→50px (mobile
+   299.5→50), title 4rem→2rem, colour black→white, background transparent→black,
+   subtitle and contact links fading out, over roughly 75% of a viewport of
+   scrolling. Reproduced with animation-timeline: scroll(); browsers without
+   support simply keep the initial state. */
+@keyframes hdr-bar { to { background: black; color: white; } }
+@keyframes hdr-title { to { font-size: 2rem; } }
+@keyframes hdr-fade { to { opacity: 0; visibility: hidden; } }
+/* An explicit start: `max-height: none` is not interpolable, so without a `from`
+   the collapse flips discretely at 50% of the range instead of easing shut. */
+@keyframes hdr-collapse { from { max-height: 12rem; } to { max-height: 0; padding-top: 0; padding-bottom: 0; } }
+
+@supports (animation-timeline: scroll()) {
+  /* Longhands on purpose: Lightning CSS rewrites the shorthand and turns `auto` into 0s. */
+  .hdr {
+    animation-name: hdr-bar;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0 75svh;
+  }
+
+  .hdr-title {
+    animation-name: hdr-title;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0 75svh;
+  }
+
+  .hdr-fade {
+    animation-name: hdr-fade, hdr-collapse;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0 37svh;
+  }
+}
+
+/* ── Filter: the client toolbar sets data-dim on cards that do not match ─ */
+.xp-card, .xp-card h3, .xp-card li, .xp-card .chip { transition: color 0.5s ease; }
+.xp-notes > li { list-style: square; }
+.xp-card .xp-notes > li:nth-child(odd) { color: var(--color-grayblue); }
+.xp-card[data-dim] { color: rgb(255 255 255 / 0.7); }
+.xp-card[data-dim] h3 { color: hsl(195 100% 49% / 0.7); }
+.xp-card[data-dim] .xp-notes > li:nth-child(odd) { color: hsl(195 85% 80% / 0.7); }
+.chip { color: var(--color-gray); }
+button.chip:hover { color: hsl(0 0% 50% / 0.7); }
+.chip[aria-pressed='true'] { color: var(--color-blue); }
+button.chip[aria-pressed='true']:hover { color: hsl(195 100% 49% / 0.7); }
+
+/* ── Skills: proficiency bars ────────────────────────────────────────── */
+/* The Angular site styled these too; left unstyled they render as the UA's
+   default green, which belongs to no part of this palette. */
+progress {
+  accent-color: var(--color-blue);
+  width: 100%;
+  height: 0.5rem;
+}
+progress::-webkit-progress-bar { background: hsl(0 0% 50% / 0.35); border-radius: 0.25rem; }
+progress::-webkit-progress-value { background: var(--color-blue); border-radius: 0.25rem; }
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .primary-column section { border-radius: 0; background-color: transparent; }
+}

@@ -1,0 +1,49 @@
+name: lighthouse
+
+# Vercel's GitHub integration posts a deployment_status when a preview finishes
+# building, which carries the URL to audit. workflow_dispatch is the manual door:
+# it takes a URL directly, which is how a branch is checked before it has a
+# deployment on this workflow's own ref.
+permissions:
+  contents: read
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: URL to audit
+        required: true
+        type: string
+
+# One audit per deployment: a new push supersedes the run for the older commit.
+concurrency:
+  # `deployment` is a sibling of `deployment_status` in the payload, not nested
+  # inside it — keyed off the wrong path this collapses to one global group and
+  # a preview on one branch cancels an unrelated branch's audit.
+  group: lighthouse-${{ github.event.deployment.sha || inputs.url || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    # Preview deployments only, and only once they are actually ready.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       startsWith(github.event.deployment_status.environment, 'Preview'))
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        form-factor: [mobile, desktop]
+    name: lighthouse (${{ matrix.form-factor }})
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Audit ${{ matrix.form-factor }}
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: ${{ github.event.deployment_status.environment_url || inputs.url }}
+          configPath: ./lighthouserc.${{ matrix.form-factor }}.json
+          uploadArtifacts: true
+          artifactName: lighthouse-${{ matrix.form-factor }}
