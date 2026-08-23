@@ -5,6 +5,7 @@ import { IconSprite } from '@/components/icon-sprite';
 import { SiteHeader } from '@/components/site-header';
 import { SkillsSection } from '@/components/skills';
 import { resume } from '@/data/resume';
+import { personJsonLd } from './seo';
 
 // The look shared by every section in the primary column. It lives on the
 // <section> itself so the mobile rule that strips it can find it.
@@ -14,6 +15,12 @@ export default function Home() {
   return (
     /* pb-[200px]: the prototype's breathing room below the last section. */
     <main className="relative isolate min-h-svh overflow-x-clip pb-[200px]">
+      <script
+        type="application/ld+json"
+        // The resume's own contact details, so search engines read the same
+        // facts the page shows.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(resume.contact)) }}
+      />
       <IconSprite />
       <HeroBackground />
       {/* Mobile gradient underlay; the Angular site sized this with screen.availHeight. */}
