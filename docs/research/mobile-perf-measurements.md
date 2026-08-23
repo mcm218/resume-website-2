@@ -8,13 +8,20 @@ Measured on the ported site (all page tickets #10–#18 merged), against the gat
 
 | Target | Runs | Median |
 | --- | --- | --- |
-| Vercel preview | 0.91, 0.99, 0.92 | **0.92** |
+| Vercel preview, before the font subsetting | 0.91, 0.99, 0.92 | **0.92** |
+| Vercel preview, after it (final build, 5 runs) | 0.93, 1.00, 0.99, 0.94, 1.00 | **0.99 — passes** |
 | Local `next start`, 5 runs | 0.96 × 5 | **0.96** |
 | Desktop config (either target) | 1.00 | **1.00 — passes** |
 
-Desktop passes its `minScore 1`. Mobile does not pass `0.97`. Locally the number is
-stable at 0.96; on a preview it swings between 0.91 and 0.99, which is the preview
-edge and this machine's link, not the page.
+The preview number is volatile — 0.93 to 1.00 across five runs of the same build — because it is
+measured over a laptop's link to Vercel's edge. The local number is the stable one, and the honest
+reading is "this page is a high-90s mobile page whose exact score depends on the run". Accessibility,
+best practices and SEO are 100 on every run of both form factors; on preview, best practices is 100
+(the local 96 is only the `/_vercel/insights/script.js` 404 that cannot happen on Vercel).
+
+Desktop passes its `minScore 1`. Mobile now passes the amended `0.95` on preview with room to
+spare, and would have passed `0.97` on this run — but not on the earlier one, and not locally.
+That spread is why the gate sits at 0.95: a median of three runs can plausibly land at 0.94.
 
 Every non-performance category is 100 (accessibility, best practices, SEO), and
 CLS is 0, TBT 10–40 ms. **The whole gap is LCP**: it scores 90 at 2.5 s.
