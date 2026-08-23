@@ -1,7 +1,7 @@
 import { formatDateRange } from '@/data/resume';
 import type { ExperienceGroup, ExperienceItem } from '@/data/schema';
 import { SKILLS } from '@/data/skills';
-import { Icon } from './icon-sprite';
+import { Icon } from './icon';
 
 export function ExperienceGroupSection({
   group,

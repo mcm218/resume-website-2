@@ -1,5 +1,5 @@
 import { resume } from '@/data/resume';
-import { Icon } from './icon-sprite';
+import { Icon } from './icon';
 
 const { name, title, email, linkedin, github } = resume.contact;
 

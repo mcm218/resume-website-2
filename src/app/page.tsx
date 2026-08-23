@@ -1,4 +1,5 @@
 import { ExperienceGroupSection } from '@/components/experience';
+import { FilterToolbar } from '@/components/filter-toolbar';
 import { HeroBackground } from '@/components/hero-background';
 import { IconSprite } from '@/components/icon-sprite';
 import { SiteHeader } from '@/components/site-header';
@@ -20,7 +21,8 @@ export default function Home() {
         aria-hidden="true"
         className="absolute inset-x-0 top-0 -z-10 h-svh bg-[linear-gradient(180deg,transparent_30%,rgba(0,0,0,0.8)_80%,#000_100%)] sm:hidden"
       />
-      <div className="primary-column mx-auto flex max-w-[1920px] flex-col gap-[12.5rem] px-4 max-sm:px-0">
+      <FilterToolbar />
+      <div className="primary-column mx-auto flex max-w-[1920px] flex-col gap-[12.5rem] px-4 transition-[padding-left] duration-250 data-[expanded=true]:pl-[102px] max-sm:px-0">
         <SiteHeader />
         {resume.experience.map((group, index) => (
           <ExperienceGroupSection

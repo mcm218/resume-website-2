@@ -1,5 +1,4 @@
-import type { SVGProps } from 'react';
-import { ICONS, type IconId } from './icons';
+import { ICONS } from './icons';
 
 /**
  * Every icon defined exactly once as a `<symbol>`; everything else on the page
@@ -15,18 +14,6 @@ export function IconSprite() {
           </symbol>
         ))}
       </defs>
-    </svg>
-  );
-}
-
-export function Icon({
-  id,
-  className = 'h-7 w-7',
-  ...props
-}: { id: IconId } & SVGProps<SVGSVGElement>) {
-  return (
-    <svg className={className} fill="currentColor" aria-hidden="true" {...props}>
-      <use href={`#i-${id}`} />
     </svg>
   );
 }
