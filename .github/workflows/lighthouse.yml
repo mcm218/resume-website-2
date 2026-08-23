@@ -4,6 +4,9 @@ name: lighthouse
 # building, which carries the URL to audit. workflow_dispatch is the manual door:
 # it takes a URL directly, which is how a branch is checked before it has a
 # deployment on this workflow's own ref.
+permissions:
+  contents: read
+
 on:
   deployment_status:
   workflow_dispatch:
@@ -15,7 +18,10 @@ on:
 
 # One audit per deployment: a new push supersedes the run for the older commit.
 concurrency:
-  group: lighthouse-${{ github.event.deployment_status.deployment.sha || github.event.inputs.url }}
+  # `deployment` is a sibling of `deployment_status` in the payload, not nested
+  # inside it — keyed off the wrong path this collapses to one global group and
+  # a preview on one branch cancels an unrelated branch's audit.
+  group: lighthouse-${{ github.event.deployment.sha || inputs.url || github.run_id }}
   cancel-in-progress: true
 
 jobs:
