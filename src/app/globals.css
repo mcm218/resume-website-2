@@ -12,32 +12,35 @@
   --radius-card: 0.3rem;
 }
 
-html, body { height: 100%; }
+/* Element defaults. In @layer base so utility classes still win over them. */
+@layer base {
+  html, body { height: 100%; }
 
-body {
-  background: black;
-  color: white;
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 16px;
+  body {
+    background: black;
+    color: white;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.3rem; font-weight: 200; margin: 0; }
+  h1 { font-size: 4rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.5rem; color: var(--color-blue); }
+  p, ul { margin: 0; }
+  p { font-weight: 300; }
+  ul { padding-left: 0; }
+  li { list-style: none; }
+  a { color: inherit; }
+
+  section, aside, header { padding: 1rem; }
+
+  /* Scrollbar (faithful to the Angular site) */
+  ::-webkit-scrollbar { width: 0.5rem; }
+  ::-webkit-scrollbar-track { background: black; }
+  ::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 0.25rem; }
 }
-
-h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.3rem; font-weight: 200; margin: 0; }
-h1 { font-size: 4rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; color: var(--color-blue); }
-p, ul { margin: 0; }
-p { font-weight: 300; }
-ul { padding-left: 0; }
-li { list-style: none; }
-a { color: inherit; }
-
-section, aside, header { padding: 1rem; }
-
-/* Scrollbar (faithful to the Angular site) */
-::-webkit-scrollbar { width: 0.5rem; }
-::-webkit-scrollbar-track { background: black; }
-::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 0.25rem; }
 
 /* ── Header: scroll-driven, zero JS ───────────────────────────────────── */
 /* Angular animated the bar from scroll handlers: height 144.5→50px (mobile
@@ -48,7 +51,9 @@ section, aside, header { padding: 1rem; }
 @keyframes hdr-bar { to { background: black; color: white; } }
 @keyframes hdr-title { to { font-size: 2rem; } }
 @keyframes hdr-fade { to { opacity: 0; visibility: hidden; } }
-@keyframes hdr-collapse { to { max-height: 0; padding-top: 0; padding-bottom: 0; } }
+/* An explicit start: `max-height: none` is not interpolable, so without a `from`
+   the collapse flips discretely at 50% of the range instead of easing shut. */
+@keyframes hdr-collapse { from { max-height: 12rem; } to { max-height: 0; padding-top: 0; padding-bottom: 0; } }
 
 @supports (animation-timeline: scroll()) {
   /* Longhands on purpose: Lightning CSS rewrites the shorthand and turns `auto` into 0s. */

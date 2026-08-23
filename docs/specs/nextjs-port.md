@@ -73,12 +73,16 @@ Server components except the toolbar. Order inside `<main class="relative isolat
 
 ### Header
 
-Fixed header + spacer (`h-[300px] sm:h-[145px]`). Scroll-driven CSS animations, zero JS, all with
+Fixed header + spacer. The spacer is an inert, `invisible` copy of the header content rather
+than a fixed height: the resting height depends on how the name wraps, and the hard-coded
+`h-[300px] sm:h-[145px]` under-reserved it by 116px at 375px and 159px at 640px (found in #14). Scroll-driven CSS animations, zero JS, all with
 `animation-timeline: scroll(root)` and `animation-duration: auto` declared as **longhands**
 (Lightning CSS rewrites the shorthand and turns `auto` into `0s`):
 - `.hdr`: background transparent→black, color black→white over `0 75svh`.
 - `.hdr-title`: `font-size` 4rem→2rem over `0 75svh`.
 - `.hdr-fade` (subtitle, contact nav): opacity→0, visibility hidden, `max-height`→0 over `0 37svh`.
+  The collapse keyframe needs an explicit `from` height — `max-height: none` is not interpolable,
+  so without one the collapse flips discretely at 50% of the range (found in #14).
 Wrapped in `@supports (animation-timeline: scroll())`; unsupported browsers keep the initial state.
 
 ### Cards and skills

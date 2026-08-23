@@ -73,6 +73,14 @@ source (`src/assets/hero-desktop.jpg`, 2400×1350) at quality 60 above 600px, th
 `fetchPriority="high"` and deliberately no `<link rel=preload>` — the candidate depends on the
 viewport. On a local mobile Lighthouse run the LCP element is that `<img>` at ~11 KB AVIF with CLS 0.
 
+## Styling
+
+Tailwind v4. Design tokens live in `@theme inline` in `src/app/globals.css`; element defaults sit in
+`@layer base` so utility classes still win over them — unlayered base rules quietly beat every
+utility, which is what made the header's `p-0` a no-op. Component-level rules that must override
+utilities (the scroll-driven header, the filter's dimming, the mobile section rules) stay unlayered
+on purpose.
+
 ## Icons
 
 Every icon is defined once as an SVG `<symbol>` in `src/components/icon-sprite.tsx`; everything else

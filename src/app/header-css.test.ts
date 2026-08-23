@@ -30,6 +30,14 @@ describe('scroll-driven header CSS', () => {
     expect(rule('.hdr-fade')).toContain('animation-range: 0 37svh');
   });
 
+  // `max-height: none` is not interpolable: without an explicit `from`, the
+  // collapse flips discretely at 50% of the range instead of easing shut.
+  it('gives the collapse an interpolable starting height', () => {
+    const start = css.indexOf('@keyframes hdr-collapse');
+    const collapse = css.slice(start, css.indexOf('\n', start));
+    expect(collapse).toMatch(/from\s*\{[^}]*max-height:\s*[\d.]+/);
+  });
+
   it('guards the whole block behind @supports', () => {
     expect(css).toContain('@supports (animation-timeline: scroll())');
   });
