@@ -1,13 +1,42 @@
 @import 'tailwindcss';
 
 @theme inline {
+  --font-sans: var(--font-montserrat), var(--font-montserrat-body), "Helvetica Neue", sans-serif;
   --color-blue: hsl(195 100% 49%);
   --color-grayblue: hsl(195 85% 80%);
   --color-gray: hsl(0 0% 50%);
   --radius-card: 0.3rem;
 }
 
+
+html, body { height: 100%; }
+
 body {
   background: black;
   color: white;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+}
+
+h1, h2, h3, h4 { letter-spacing: 0.3rem; font-weight: 200; margin: 0; }
+h1 { font-size: 4rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; color: var(--color-blue); }
+p, ul { margin: 0; }
+p { font-weight: 300; }
+ul { padding-left: 0; }
+li { list-style: none; }
+a { color: inherit; }
+
+section, aside, header { padding: 1rem; }
+
+/* Scrollbar (faithful to the Angular site) */
+::-webkit-scrollbar { width: 0.5rem; }
+::-webkit-scrollbar-track { background: black; }
+::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 0.25rem; }
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .primary-column section { border-radius: 0 !important; background-color: transparent !important; }
 }

@@ -54,6 +54,24 @@ validated at import by the zod schema in `src/data/schema.ts`
 
 A bad date or unknown skill id fails `pnpm test` and `pnpm build`.
 
+## Fonts
+
+`src/app/fonts.ts` loads three Latin-subset Montserrat weights with `next/font/local` from
+`src/app/fonts/`. Only weight 200 (the h1/h2 above the fold) is preloaded; 300/400 load on demand.
+The subsets were produced with fonttools:
+
+```bash
+uvx --with brotli --from fonttools pyftsubset Montserrat-ExtraLight.ttf --unicodes="U+0000-00FF,U+2000-206F,U+2C60-2C7F" --layout-features="*" --flavor=woff2 --output-file=src/app/fonts/Montserrat-ExtraLight.subset.woff2
+```
+
+## Hero
+
+`src/components/hero-background.tsx` builds a real `<picture>` from `getImageProps`: the desktop
+source (`src/assets/hero-desktop.jpg`, 2400×1350) at quality 60 above 600px, the phone `<img>`
+(`hero-phone.jpg`, 2400×3000) at quality 55 below it, `sizes="100vw"`, eager with
+`fetchPriority="high"` and deliberately no `<link rel=preload>` — the candidate depends on the
+viewport. On a local mobile Lighthouse run the LCP element is that `<img>` at ~11 KB AVIF with CLS 0.
+
 ## Icons
 
 Every icon is defined once as an SVG `<symbol>` in `src/components/icon-sprite.tsx`; everything else

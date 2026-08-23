@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
+import { montserrat, montserratBody } from './fonts';
 import { resume } from '@/data/resume';
 import './globals.css';
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`${montserrat.variable} ${montserratBody.variable} h-full`}>
       <body className="min-h-full">
         {children}
         <Analytics />
