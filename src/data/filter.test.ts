@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { matches, toggle } from './filter';
+import { matches, parseSkills, toggle } from './filter';
 import type { SkillId } from './skills';
 
 const item: SkillId[] = ['angular', 'typescript'];
@@ -38,5 +38,21 @@ describe('toggle', () => {
     const after = toggle(before, 'angular');
     expect(after).not.toBe(before);
     expect([...before]).toEqual(['react']);
+  });
+});
+
+describe('parseSkills', () => {
+  it('reads a data-skills attribute into skill ids', () => {
+    expect(parseSkills('angular html')).toEqual(['angular', 'html']);
+  });
+
+  it('is empty for an absent or blank attribute', () => {
+    expect(parseSkills('')).toEqual([]);
+    expect(parseSkills(undefined)).toEqual([]);
+    expect(parseSkills('   ')).toEqual([]);
+  });
+
+  it('tolerates repeated separators', () => {
+    expect(parseSkills(' angular  react ')).toEqual(['angular', 'react']);
   });
 });

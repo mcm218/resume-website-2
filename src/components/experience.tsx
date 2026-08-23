@@ -44,7 +44,7 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
       )}
       <ul className="flex flex-wrap items-center gap-2.5" aria-label="Skills used">
         {item.skills.map((id) => (
-          <li key={id} className="chip" title={SKILLS[id].name}>
+          <li key={id} className="chip" data-skill={id} title={SKILLS[id].name}>
             <Icon id={SKILLS[id].icon} />
             <span className="sr-only">{SKILLS[id].name}</span>
           </li>

@@ -14,3 +14,11 @@ export function toggle(selected: ReadonlySet<SkillId>, id: SkillId): Set<SkillId
   if (!next.delete(id)) next.add(id);
   return next;
 }
+
+/**
+ * Read a card's `data-skills` attribute. The cards are server HTML, so the
+ * toolbar meets them as a space-separated string rather than as an array.
+ */
+export function parseSkills(attribute: string | undefined): SkillId[] {
+  return (attribute ?? '').split(' ').filter(Boolean) as SkillId[];
+}
