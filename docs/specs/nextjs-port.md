@@ -91,7 +91,10 @@ Wrapped in `@supports (animation-timeline: scroll())`; unsupported browsers keep
 `ExperienceCard` = `<article class="xp-card" data-skills="…">` with role/company, date line
 (only when `start` exists), skill chips (`<li>` with sprite icon + `sr-only` name), square-bulleted notes,
 optional links list. Dimmed state via `[data-dim]` CSS (white 70 %, blue 70 %, grayblue 70 %).
-`SkillsSection`: `<label for>` + `<progress max=10 value=level>` per entry; registry name wins when `skill` is set.
+`SkillsSection`: `<label for>` + `<progress max=10 value=level>` per entry; registry name wins when `skill` is set. `<progress>` needs its own styling
+(`accent-color` plus the webkit pseudo-elements): unstyled it renders the UA's default green, which is
+in neither palette (found in #16). Entry ids come from the skill id where there is one — slugged
+titles collapse punctuation, so "C#" and "C++" would collide.
 
 ### Tokens (`globals.css`)
 

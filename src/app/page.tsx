@@ -5,6 +5,10 @@ import { SiteHeader } from '@/components/site-header';
 import { SkillsSection } from '@/components/skills';
 import { resume } from '@/data/resume';
 
+// The look shared by every section in the primary column. It lives on the
+// <section> itself so the mobile rule that strips it can find it.
+const CARD_SURFACE = 'rounded-[var(--radius-card)] bg-black/70';
+
 export default function Home() {
   return (
     /* pb-[200px]: the prototype's breathing room below the last section. */
@@ -22,15 +26,10 @@ export default function Home() {
           <ExperienceGroupSection
             key={group.title}
             group={group}
-            className={`rounded-[var(--radius-card)] bg-black/70 ${
-              index % 2 === 0 ? 'self-start' : 'self-end'
-            }`}
+            className={`${CARD_SURFACE} ${index % 2 === 0 ? 'self-start' : 'self-end'}`}
           />
         ))}
-        <SkillsSection
-          blocks={resume.skillBlocks}
-          className="rounded-[var(--radius-card)] bg-black/70"
-        />
+        <SkillsSection blocks={resume.skillBlocks} className={CARD_SURFACE} />
       </div>
     </main>
   );
