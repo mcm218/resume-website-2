@@ -36,7 +36,9 @@ export const ExperienceItemSchema = z
     notes: z.array(z.string().min(1)),
     links: z.array(LinkSchema).optional(),
   })
-  .refine((i) => i.end === undefined || i.start !== undefined, { message: '`end` requires `start`' });
+  .refine((item) => item.end === undefined || item.start !== undefined, {
+    message: '`end` requires `start`',
+  });
 
 export const ExperienceGroupSchema = z.object({
   title: z.string().min(1),

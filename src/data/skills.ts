@@ -1,5 +1,4 @@
 // Skill registry: single source of truth for ids, display names and icon ids.
-// Bit order of the old FilterItem bitmask is preserved (bit 0 = csharp … bit 15 = rabbitmq).
 export const SKILL_IDS = [
   'csharp',
   'unity',
