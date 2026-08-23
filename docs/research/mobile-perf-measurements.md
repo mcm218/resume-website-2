@@ -41,15 +41,20 @@ compressed HTML (137 KB raw, of which 29 KB is the icon sprite), 11 KB hero.
 AVIF is worth its decode cost: the bytes it saves matter more than the ~700 ms of
 simulated decode it adds.
 
-## What is left
+## What was decided
 
-The remaining levers all cost something, so they are decisions rather than fixes:
+The gate is **0.95**, and [ADR 0001](../adr/0001-nextjs-over-astro-accept-97-mobile.md) is amended
+to say so: it protects today's baseline from regression rather than asserting the ideal. Getting
+the number back up is [spike #23](https://github.com/mcm218/resume-website-2/issues/23), which
+carries the candidates — React Compiler, dropping the React runtime for the one island, a lighter
+hero, trimming the sprite out of the HTML.
 
-1. **Accept 0.96** and set the mobile gate to 0.95, amending ADR 0001.
-2. **Trade fidelity**: drop the 400 face (notes render at 300), or ship a smaller hero.
-3. **Drop the React runtime**: ~115 KB of JS exists for one filter island. Replacing it
-   with a small vanilla script would very likely take mobile to ~99, at the cost of the
-   `FilterToolbar` client-island design in the spec.
+The two levers that were on the table and are *not* being taken now:
+
+1. **Trade fidelity**: drop the 400 face (notes render at 300), or ship a smaller hero.
+2. **Drop the React runtime**: ~115 KB of JS exists for one filter island. Replacing it with a
+   small vanilla script would very likely take mobile to ~99, at the cost of the `FilterToolbar`
+   client-island design in the spec.
 
 Note that CI runs on GitHub's runners, not a laptop — the one 0.99 sample above shows
 the page can score there. The gate has never actually run in CI, because

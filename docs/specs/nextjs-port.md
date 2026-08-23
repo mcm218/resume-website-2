@@ -6,7 +6,7 @@ Decisions live in the closed tickets; this document consolidates them for implem
 ## Goal
 
 Replace the Angular 17 + Express app with a faithful, fully static Next.js site on Vercel.
-Lighthouse (lab, `/`): **desktop 100/100/100/100; mobile ≥97 perf, 100/100/100**
+Lighthouse (lab, `/`): **desktop 100/100/100/100; mobile ≥95 perf, 100/100/100**
 (see [ADR 0001](../adr/0001-nextjs-over-astro-accept-97-mobile.md)). Guarded by Lighthouse CI.
 
 ## Stack
@@ -138,7 +138,7 @@ From [research #4](https://github.com/mcm218/resume-website-2/issues/4):
   matrix `[mobile, desktop]`, `treosh/lighthouse-ci-action@v12`, `uploadArtifacts: true`,
   concurrency keyed on the deployment SHA.
 - `lighthouserc.mobile.json`: `numberOfRuns 3`, `skipAudits ["is-crawlable"]` (previews are `noindex`),
-  `categories:performance minScore 0.97 median`, others `minScore 1 pessimistic`.
+  `categories:performance minScore 0.95 median`, others `minScore 1 pessimistic`.
 - `lighthouserc.desktop.json`: same with `settings.preset: "desktop"` and performance `minScore 1`.
 - Deployment Protection is **off** on the Vercel project (no bypass header needed).
 - Once on `main`, make `lighthouse (mobile)` and `lighthouse (desktop)` required checks. The port PR
@@ -152,7 +152,7 @@ Analytics enabled, GitHub integration on `main`. Preview pattern
 
 ## Cutover (after the port PR merges)
 
-1. Production deploys to `resume-website-2-seven.vercel.app`. Run PageSpeed Insights (mobile + desktop); require desktop 100s, mobile ≥97/100/100/100.
+1. Production deploys to `resume-website-2-seven.vercel.app`. Run PageSpeed Insights (mobile + desktop); require desktop 100s, mobile ≥95/100/100/100.
 2. Vercel → Domains: add `michaelcmuniz.com` (primary), `www.michaelcmuniz.com` and `resume.michaelcmuniz.com` as 308 redirects to the apex.
 3. Cloudflare DNS: replace the Fly records with Vercel's A (apex) / CNAME (`www`, `resume`) records, **DNS-only (grey cloud)**, SSL stays managed by Vercel.
 4. Wait for propagation; PSI on `https://michaelcmuniz.com` must pass; confirm `robots`/canonical/`sitemap.xml` resolve and `X-Robots-Tag` is absent.
