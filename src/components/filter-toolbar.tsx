@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useSyncExternalStore } from 'react';
-import { matches, toggle } from '@/data/filter';
+import { matches, parseSkills, toggle } from '@/data/filter';
 import { SKILL_IDS, SKILLS, type SkillId } from '@/data/skills';
 import { Icon } from './icon';
 
@@ -37,9 +37,16 @@ export function FilterToolbar() {
 
   useEffect(() => {
     for (const card of document.querySelectorAll<HTMLElement>('.xp-card')) {
-      const skills = (card.dataset.skills ?? '').split(' ').filter(Boolean) as SkillId[];
-      if (matches(skills, selected)) delete card.dataset.dim;
+      if (matches(parseSkills(card.dataset.skills), selected)) delete card.dataset.dim;
       else card.dataset.dim = '';
+
+      // Dimming a whole card is a weak signal on its own, so the chips for the
+      // skills actually selected light up in the accent colour as well.
+      for (const chip of card.querySelectorAll<HTMLElement>('.chip[data-skill]')) {
+        const skill = chip.dataset.skill as SkillId;
+        if (selected.has(skill)) chip.dataset.on = '';
+        else delete chip.dataset.on;
+      }
     }
     for (const column of document.querySelectorAll<HTMLElement>('.primary-column')) {
       column.dataset.expanded = String(expanded);
