@@ -22,7 +22,10 @@ export default function Home() {
         className="absolute inset-x-0 top-0 -z-10 h-svh bg-[linear-gradient(180deg,transparent_30%,rgba(0,0,0,0.8)_80%,#000_100%)] sm:hidden"
       />
       <FilterToolbar />
-      <div className="primary-column mx-auto flex max-w-[1920px] flex-col gap-[12.5rem] px-4 transition-[padding-left] duration-250 data-[expanded=true]:pl-[102px] max-sm:px-0">
+      <div
+        data-expanded="true"
+        className="primary-column mx-auto flex max-w-[1920px] flex-col gap-[12.5rem] px-4 transition-[padding-left] duration-250 max-sm:px-0 sm:data-[expanded=true]:pl-[102px]"
+      >
         <SiteHeader />
         {resume.experience.map((group, index) => (
           <ExperienceGroupSection

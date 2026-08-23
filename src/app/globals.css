@@ -93,9 +93,9 @@
 .xp-card[data-dim] h3 { color: hsl(195 100% 49% / 0.7); }
 .xp-card[data-dim] .xp-notes > li:nth-child(odd) { color: hsl(195 85% 80% / 0.7); }
 .chip { color: var(--color-gray); }
-.chip:hover { color: hsl(0 0% 50% / 0.7); }
+button.chip:hover { color: hsl(0 0% 50% / 0.7); }
 .chip[aria-pressed='true'] { color: var(--color-blue); }
-.chip[aria-pressed='true']:hover { color: hsl(195 100% 49% / 0.7); }
+button.chip[aria-pressed='true']:hover { color: hsl(195 100% 49% / 0.7); }
 
 /* ── Skills: proficiency bars ────────────────────────────────────────── */
 /* The Angular site styled these too; left unstyled they render as the UA's

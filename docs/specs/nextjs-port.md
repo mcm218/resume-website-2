@@ -65,8 +65,16 @@ Server components except the toolbar. Order inside `<main class="relative isolat
    `next.config.ts`: `images.formats ['image/avif','image/webp']`, `images.qualities [55,60,75]`.
 3. Mobile gradient underlay: pure CSS `h-svh` div, `sm:hidden` (replaces the `screen.availHeight` JS).
 4. `FilterToolbar` (client island): `useState<Set<SkillId>>`, 16 `<button aria-pressed>` chips using sprite
-   icons, collapse handle with `aria-expanded`; collapsed by default when `innerWidth < 600`. Effect sets
-   `data-dim` on `.xp-card` elements that fail `matches()`, and `data-expanded` on `.primary-column`.
+   icons, collapse handle with `aria-expanded`; collapsed by default below 600px, via
+   `useSyncExternalStore` over a media query rather than `setState` in an effect (the React compiler
+   lint rejects that, and it cascades a render). Collapsing slides the list out by its own width
+   (`translate-x-[calc(-100%+1.25rem)]`) so the handle stays on screen — a fixed offset put it entirely
+   off-screen on phones, the one viewport where collapsed is the default (found in #17). The list is
+   `inert` while collapsed, and `.primary-column` ships `data-expanded="true"` from the server so the
+   102px offset does not land after hydration (measured CLS 0.033 → 0); that offset applies from `sm`
+   up only. Effect sets `data-dim` on `.xp-card` elements that fail `matches()`.
+   `Icon` must live in its own module, apart from the sprite: importing it from `icon-sprite.tsx`
+   pulls every icon's path data into the client bundle (found in #17).
 5. `.primary-column` (flex column, gap 12.5rem, max 1920px, `pl-[102px]` when expanded):
    `SiteHeader`, one `ExperienceGroupSection` per group (alternating `self-start`/`self-end`, `bg-black/70`,
    radius token), `SkillsSection`. Those classes go on the `<section>` itself, not a wrapper `<div>`:
