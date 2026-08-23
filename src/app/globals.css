@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-blue: hsl(195 100% 49%);
+  --color-grayblue: hsl(195 85% 80%);
+  --color-gray: hsl(0 0% 50%);
+  --radius-card: 0.3rem;
+}
+
+body {
+  background: black;
+  color: white;
+}
