@@ -23,7 +23,6 @@ export default function Home() {
           __html: JSON.stringify(personJsonLd(resume.contact)).replace(/</g, '\\u003c'),
         }}
       />
-      <IconSprite />
       <HeroBackground />
       {/* Mobile gradient underlay; the Angular site sized this with screen.availHeight. */}
       <div
@@ -45,6 +44,10 @@ export default function Home() {
         ))}
         <SkillsSection blocks={resume.skillBlocks} className={CARD_SURFACE} />
       </div>
+      {/* Last: the sprite is 29 KB of markup, and anything before the hero delays
+          discovery of the LCP image. <use> resolves by id whenever the symbol
+          parses, so its position in the document does not matter. */}
+      <IconSprite />
     </main>
   );
 }
