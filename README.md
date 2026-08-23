@@ -54,6 +54,22 @@ validated at import by the zod schema in `src/data/schema.ts`
 
 A bad date or unknown skill id fails `pnpm test` and `pnpm build`.
 
+## Icons
+
+Every icon is defined once as an SVG `<symbol>` in `src/components/icon-sprite.tsx`; everything else
+references it with `<use href="#i-<icon id>">`. No icon code runs in the browser.
+
+- `src/components/icons.generated.tsx` — FontAwesome glyphs, written by `pnpm gen:icons`
+  (`scripts/gen-icons.mjs`). Do not edit by hand. `@fortawesome/*` are devDependencies and never
+  reach the client bundle.
+- `src/components/icons.hand.tsx` — the eight glyphs FontAwesome does not carry, hand-extracted from
+  the old Angular `svg-renderer`.
+- `src/components/icons.ts` — merges both into `ICONS`, keyed by icon id. Skills reach their icon
+  through `SKILLS[id].icon` (`src/data/skills.ts`).
+
+Adding a FontAwesome icon: add it to `WANTED` in `scripts/gen-icons.mjs`, run `pnpm gen:icons`,
+commit the regenerated file.
+
 ## Lighthouse CI
 
 Target for `/`: desktop 100/100/100/100, mobile ≥ 97 performance and 100 elsewhere
