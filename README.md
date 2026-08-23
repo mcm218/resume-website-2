@@ -42,18 +42,17 @@ behavioural gate (below).
 
 ## Editing resume data
 
-The site renders one document, the **resume** (see `CONTEXT.md`). At this stage of the port the
-legacy document still lives at `src/assets/me.json` and nothing renders it yet.
+The site renders one document, the **resume** (see `CONTEXT.md`): `src/data/resume.json`. It is
+validated at import by the zod schema in `src/data/schema.ts`
+([`docs/specs/resume-schema.md`](docs/specs/resume-schema.md)):
 
-The data ticket replaces it with `src/data/resume.json`, validated at import by a zod schema
-(`src/data/schema.ts`) per [`docs/specs/resume-schema.md`](docs/specs/resume-schema.md):
-
-- dates are `YYYY-MM`; `end: null` means Present
+- dates are `YYYY-MM`; `end: null` means Present; `end` requires `start`
 - every experience item lists skills by their registry id (`src/data/skills.ts`)
 - notes are plain text; `links` are optional `{ label, url }` pairs
-- skill blocks carry a `level` from 1 to 10
+- skill blocks carry a `level` from 1 to 10; set `skill` to reuse a registry name
+- items render in document order
 
-Once that lands, a bad date or unknown skill id fails `pnpm test` and `pnpm build`.
+A bad date or unknown skill id fails `pnpm test` and `pnpm build`.
 
 ## Lighthouse CI
 

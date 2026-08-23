@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
+import { resume } from '@/data/resume';
 import './globals.css';
+
+const { name, title, location } = resume.contact;
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://michaelcmuniz.com'),
-  title: 'Michael Muñiz | Resume',
-  description: 'Resume of Michael Muñiz.',
+  title: `${name} | Resume`,
+  description: `${name}, ${title} in ${location}. Experience, projects and skills.`,
   alternates: { canonical: '/' },
 };
 
