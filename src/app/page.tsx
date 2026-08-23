@@ -2,6 +2,7 @@ import { ExperienceGroupSection } from '@/components/experience';
 import { HeroBackground } from '@/components/hero-background';
 import { IconSprite } from '@/components/icon-sprite';
 import { SiteHeader } from '@/components/site-header';
+import { SkillsSection } from '@/components/skills';
 import { resume } from '@/data/resume';
 
 export default function Home() {
@@ -26,6 +27,10 @@ export default function Home() {
             }`}
           />
         ))}
+        <SkillsSection
+          blocks={resume.skillBlocks}
+          className="rounded-[var(--radius-card)] bg-black/70"
+        />
       </div>
     </main>
   );
