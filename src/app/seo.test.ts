@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import robots from './robots';
 import sitemap from './sitemap';
-import { SITE_URL, personJsonLd } from './seo';
+import { SITE_URL, personJsonLd, socialTitle } from './seo';
 import { resume } from '@/data/resume';
 
 describe('personJsonLd', () => {
@@ -19,11 +19,17 @@ describe('personJsonLd', () => {
     expect(person.sameAs).toEqual([resume.contact.linkedin, resume.contact.github]);
   });
 
-  it('carries the locality rather than a free-text address', () => {
+  it('splits the location into a locality and a region', () => {
     expect(person.address).toEqual({
       '@type': 'PostalAddress',
-      addressLocality: resume.contact.location,
+      addressLocality: 'Charlotte',
+      addressRegion: 'NC',
     });
+  });
+
+  it('leaves out the region when the location has none', () => {
+    const person = personJsonLd({ ...resume.contact, location: 'Remote' });
+    expect(person.address).toEqual({ '@type': 'PostalAddress', addressLocality: 'Remote' });
   });
 });
 
@@ -40,5 +46,11 @@ describe('robots', () => {
     const rules = robots();
     expect(rules.rules).toEqual({ userAgent: '*', allow: '/' });
     expect(rules.sitemap).toBe(`${SITE_URL}/sitemap.xml`);
+  });
+});
+
+describe('socialTitle', () => {
+  it('joins the name and title the way Open Graph and the image alt both need', () => {
+    expect(socialTitle(resume.contact)).toBe('Michael Muñiz - Fullstack Engineer');
   });
 });

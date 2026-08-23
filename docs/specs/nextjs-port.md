@@ -120,8 +120,9 @@ Webkit scrollbar styling carried over.
 `metadataBase https://michaelcmuniz.com`, title `"<name> | Resume"`, description from contact,
 `alternates.canonical '/'`, Open Graph (website, title `"<name> - <title>"`). `opengraph-image.tsx`
 generated at build (name + title over the hero, 1200×630). `sitemap.ts` (single URL), `robots.ts`
-(allow all, sitemap link). JSON-LD `Person` (`name`, `jobTitle`, `email`, `sameAs` [linkedin, github],
-`address.addressLocality`) rendered in `page.tsx`.
+(allow all, sitemap link). JSON-LD `Person` (`name`, `jobTitle`, `email`, `url`, `sameAs` [linkedin, github], `address`)
+rendered in `page.tsx`. The contact's single "Charlotte, NC" location splits into `addressLocality`
+plus `addressRegion` — schema.org's locality is the city alone (found in #18).
 
 ## Tests
 

@@ -19,7 +19,9 @@ export default function Home() {
         type="application/ld+json"
         // The resume's own contact details, so search engines read the same
         // facts the page shows.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(resume.contact)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd(resume.contact)).replace(/</g, '\\u003c'),
+        }}
       />
       <IconSprite />
       <HeroBackground />
