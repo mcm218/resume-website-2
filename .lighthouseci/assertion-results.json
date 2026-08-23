@@ -1,0 +1,20 @@
+[
+  {
+    "name": "minScore",
+    "expected": 0.97,
+    "actual": 0.92,
+    "values": [
+      0.92,
+      0.91,
+      0.92,
+      0.98,
+      0.91
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "error",
+    "url": "https://resume-website-2-izudtvhp6-michaels-projects-067ad399.vercel.app/"
+  }
+]

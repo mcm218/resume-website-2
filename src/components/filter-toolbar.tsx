@@ -47,12 +47,13 @@ export function FilterToolbar() {
   }, [selected, expanded]);
 
   return (
-    // Collapsing slides the list out by exactly its own width, so the 1.25rem
-    // handle always stays on screen — a fixed offset left it unreachable on phones,
-    // which is the one viewport where collapsed is the default.
+    // Collapsing slides the list right off the viewport edge (its own width plus
+    // the left-4 inset), leaving exactly the 1.25rem handle on screen — a fixed
+    // offset left the handle unreachable on phones, the one viewport where
+    // collapsed is the default.
     <div
       className={`fixed top-1/2 left-4 z-10 flex -translate-y-1/2 transition-transform duration-250 ease-in-out ${
-        expanded ? 'translate-x-0' : 'translate-x-[calc(-100%+1.25rem)]'
+        expanded ? 'translate-x-0' : 'translate-x-[calc(-100%+1.25rem-1rem)]'
       }`}
     >
       <ul
