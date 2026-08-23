@@ -69,7 +69,8 @@ Server components except the toolbar. Order inside `<main class="relative isolat
    `data-dim` on `.xp-card` elements that fail `matches()`, and `data-expanded` on `.primary-column`.
 5. `.primary-column` (flex column, gap 12.5rem, max 1920px, `pl-[102px]` when expanded):
    `SiteHeader`, one `ExperienceGroupSection` per group (alternating `self-start`/`self-end`, `bg-black/70`,
-   radius token), `SkillsSection`.
+   radius token), `SkillsSection`. Those classes go on the `<section>` itself, not a wrapper `<div>`:
+   the mobile rule that strips background and radius keys off `.primary-column section` (found in #15).
 
 ### Header
 

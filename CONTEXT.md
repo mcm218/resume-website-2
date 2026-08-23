@@ -14,7 +14,8 @@ _Avoid_: role (the Angular `Role` type), section
 
 **Experience Item**:
 One job or project within an experience group: role title, company, location, dates, notes, and the skills it used.
-_Avoid_: experience (bare), card
+The component that renders one is the **Experience Card** (`ExperienceCard`, `.xp-card`) — "card" names the view, never the data.
+_Avoid_: experience (bare)
 
 **Note**:
 A single plain-text bullet describing work done in an experience item. Carries no markup.

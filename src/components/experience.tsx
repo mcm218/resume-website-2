@@ -3,9 +3,18 @@ import type { ExperienceGroup, ExperienceItem } from '@/data/schema';
 import { SKILLS } from '@/data/skills';
 import { Icon } from './icon-sprite';
 
-export function ExperienceGroupSection({ group }: { group: ExperienceGroup }) {
+export function ExperienceGroupSection({
+  group,
+  className = '',
+}: {
+  group: ExperienceGroup;
+  className?: string;
+}) {
   return (
-    <section className="flex max-w-[45rem] flex-col">
+    // The background and radius live on the <section> itself: the mobile rule that
+    // strips them keys off `.primary-column section`, so a styled wrapper div would
+    // silently keep its card look on phones.
+    <section className={`flex max-w-[45rem] flex-col ${className}`}>
       <h2>{group.title}</h2>
       <ul>
         {group.items.map((item) => (
@@ -41,9 +50,11 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
           </li>
         ))}
       </ul>
-      <ul className="list-[square] pl-5">
-        {item.notes.map((note) => (
-          <li key={note} className="py-1 font-normal">
+      <ul className="xp-notes pl-5">
+        {item.notes.map((note, index) => (
+          // Index keys: notes are a fixed, document-ordered list and one item
+          // legitimately repeats a note, so the text is not a unique key.
+          <li key={index} className="py-1 font-normal">
             {note}
           </li>
         ))}

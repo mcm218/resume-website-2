@@ -18,12 +18,13 @@ export default function Home() {
       <div className="primary-column mx-auto flex max-w-[1920px] flex-col gap-[12.5rem] px-4 max-sm:px-0">
         <SiteHeader />
         {resume.experience.map((group, index) => (
-          <div
+          <ExperienceGroupSection
             key={group.title}
-            className={`rounded-[var(--radius-card)] bg-black/70 ${index % 2 === 0 ? 'self-start' : 'self-end'}`}
-          >
-            <ExperienceGroupSection group={group} />
-          </div>
+            group={group}
+            className={`rounded-[var(--radius-card)] bg-black/70 ${
+              index % 2 === 0 ? 'self-start' : 'self-end'
+            }`}
+          />
         ))}
       </div>
     </main>

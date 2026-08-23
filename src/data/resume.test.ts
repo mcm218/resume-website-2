@@ -17,7 +17,9 @@ describe('resume', () => {
 
 describe('formatDateRange', () => {
   it('renders a closed range', () => {
-    expect(formatDateRange({ start: '2022-01', end: '2022-08' })).toBe('January 2022 - August 2022');
+    expect(formatDateRange({ start: '2022-01', end: '2022-08' })).toBe(
+      'January 2022 - August 2022',
+    );
   });
 
   it('renders an open range as Present', () => {
