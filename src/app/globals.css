@@ -39,6 +39,47 @@ section, aside, header { padding: 1rem; }
 ::-webkit-scrollbar-track { background: black; }
 ::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 0.25rem; }
 
+/* ── Header: scroll-driven, zero JS ───────────────────────────────────── */
+/* Angular animated the bar from scroll handlers: height 144.5→50px (mobile
+   299.5→50), title 4rem→2rem, colour black→white, background transparent→black,
+   subtitle and contact links fading out, over roughly 75% of a viewport of
+   scrolling. Reproduced with animation-timeline: scroll(); browsers without
+   support simply keep the initial state. */
+@keyframes hdr-bar { to { background: black; color: white; } }
+@keyframes hdr-title { to { font-size: 2rem; } }
+@keyframes hdr-fade { to { opacity: 0; visibility: hidden; } }
+@keyframes hdr-collapse { to { max-height: 0; padding-top: 0; padding-bottom: 0; } }
+
+@supports (animation-timeline: scroll()) {
+  /* Longhands on purpose: Lightning CSS rewrites the shorthand and turns `auto` into 0s. */
+  .hdr {
+    animation-name: hdr-bar;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0 75svh;
+  }
+
+  .hdr-title {
+    animation-name: hdr-title;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0 75svh;
+  }
+
+  .hdr-fade {
+    animation-name: hdr-fade, hdr-collapse;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0 37svh;
+  }
+}
+
 /* Mobile layout */
 @media (max-width: 600px) {
   .primary-column section { border-radius: 0; background-color: transparent; }
