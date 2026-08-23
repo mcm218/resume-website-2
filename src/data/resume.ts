@@ -24,3 +24,18 @@ export function formatYearMonth(yearMonth: string): string {
   const [year, month] = yearMonth.split('-');
   return `${MONTHS[Number(month) - 1]} ${year}`;
 }
+
+/**
+ * The date line for an experience item: "January 2023 - Present" while it is
+ * ongoing, "January 2022 - August 2022" once it ended, and nothing at all for
+ * items that carry no start (projects, game jams).
+ */
+export function formatDateRange(item: {
+  start?: string;
+  end?: string | null;
+}): string | undefined {
+  if (!item.start) return undefined;
+  const start = formatYearMonth(item.start);
+  if (item.end === undefined) return start;
+  return `${start} - ${item.end === null ? 'Present' : formatYearMonth(item.end)}`;
+}

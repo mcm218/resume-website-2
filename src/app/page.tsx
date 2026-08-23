@@ -1,6 +1,8 @@
+import { ExperienceGroupSection } from '@/components/experience';
 import { HeroBackground } from '@/components/hero-background';
-import { SiteHeader } from '@/components/site-header';
 import { IconSprite } from '@/components/icon-sprite';
+import { SiteHeader } from '@/components/site-header';
+import { resume } from '@/data/resume';
 
 export default function Home() {
   return (
@@ -15,6 +17,14 @@ export default function Home() {
       />
       <div className="primary-column mx-auto flex max-w-[1920px] flex-col gap-[12.5rem] px-4 max-sm:px-0">
         <SiteHeader />
+        {resume.experience.map((group, index) => (
+          <div
+            key={group.title}
+            className={`rounded-[var(--radius-card)] bg-black/70 ${index % 2 === 0 ? 'self-start' : 'self-end'}`}
+          >
+            <ExperienceGroupSection group={group} />
+          </div>
+        ))}
       </div>
     </main>
   );

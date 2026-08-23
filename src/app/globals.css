@@ -85,6 +85,14 @@
   }
 }
 
+/* ── Filter: the client toolbar sets data-dim on cards that do not match ─ */
+.xp-card, .xp-card h3, .xp-card li, .xp-card .chip { transition: color 0.5s ease; }
+.xp-card li:nth-child(odd) { color: var(--color-grayblue); }
+.xp-card[data-dim] { color: rgb(255 255 255 / 0.7); }
+.xp-card[data-dim] h3 { color: hsl(195 100% 49% / 0.7); }
+.xp-card[data-dim] li:nth-child(odd) { color: hsl(195 85% 80% / 0.7); }
+.chip { color: var(--color-gray); }
+
 /* Mobile layout */
 @media (max-width: 600px) {
   .primary-column section { border-radius: 0; background-color: transparent; }
