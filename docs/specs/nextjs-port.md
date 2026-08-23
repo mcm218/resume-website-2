@@ -24,7 +24,8 @@ Lighthouse (lab, `/`): **desktop 100/100/100/100; mobile ≥97 perf, 100/100/100
 ├── src/app/            layout.tsx, page.tsx, globals.css, fonts.ts, fonts/*.subset.woff2,
 │                       opengraph-image.tsx, sitemap.ts, robots.ts, favicon.ico
 ├── src/components/     hero-background.tsx, site-header.tsx, filter-toolbar.tsx ('use client'),
-│                       experience.tsx, skills.tsx, icon-sprite.tsx, icons.generated.tsx, icons.hand.tsx
+│                       experience.tsx, skills.tsx, icon-sprite.tsx, icons.ts,
+│                       icons.generated.tsx, icons.hand.tsx
 ├── src/data/           skills.ts, schema.ts, resume.json, resume.ts, filter.ts
 ├── src/assets/         hero-desktop.jpg (2400×1350), hero-phone.jpg (2400×3000)
 ├── scripts/gen-icons.mjs
@@ -56,6 +57,9 @@ Server components except the toolbar. Order inside `<main class="relative isolat
 
 1. `IconSprite` — every icon once as `<symbol>`; all icons render as `<svg><use href="#i-…"/></svg>`.
    `scripts/gen-icons.mjs` extracts FontAwesome path data at build time (FA packages are devDependencies only).
+   `icons.generated.tsx` (FontAwesome, written by `pnpm gen:icons`) and `icons.hand.tsx` each export a
+   record of `{ viewBox, children }` keyed by icon id; `icons.ts` merges them into `ICONS` and derives
+   `IconId`, so a skill whose `icon` is not in the sprite is a type error.
 2. `HeroBackground` — `<picture>` built from `getImageProps`: desktop source `(min-width: 601px)` q60,
    phone `<img>` q55, `sizes="100vw"`, `fetchPriority="high"`, `loading="eager"`, **no** `preload`.
    `next.config.ts`: `images.formats ['image/avif','image/webp']`, `images.qualities [55,60,75]`.

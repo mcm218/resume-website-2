@@ -22,7 +22,7 @@ export type SkillId = (typeof SKILL_IDS)[number];
 
 export type Skill = { name: string; icon: string };
 
-export const SKILLS: Record<SkillId, Skill> = {
+export const SKILLS = {
   csharp: { name: 'C#', icon: 'csharp' },
   unity: { name: 'Unity', icon: 'unity' },
   xamarin: { name: 'Xamarin', icon: 'xamarin' },
@@ -39,4 +39,4 @@ export const SKILLS: Record<SkillId, Skill> = {
   elasticsearch: { name: 'ElasticSearch', icon: 'elasticsearch' },
   'react-native': { name: 'React Native', icon: 'reactnative' },
   rabbitmq: { name: 'RabbitMQ', icon: 'rabbitmq' },
-};
+} as const satisfies Record<SkillId, Skill>;

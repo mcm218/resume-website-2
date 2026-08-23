@@ -1,11 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { ICONS, ICON_IDS } from './icons';
+import { ICONS, ICON_IDS, type IconId } from './icons';
+import { GENERATED_ICONS } from './icons.generated';
+import { HAND_ICONS } from './icons.hand';
 import { SKILL_IDS, SKILLS } from '@/data/skills';
 
 describe('icon registry', () => {
-  it('defines all 21 icons exactly once', () => {
+  it('defines all 21 icons', () => {
     expect(ICON_IDS).toHaveLength(21);
-    expect(new Set(ICON_IDS).size).toBe(ICON_IDS.length);
+  });
+
+  it('defines each icon exactly once — the two sources never collide', () => {
+    const collisions = Object.keys(HAND_ICONS).filter((id) => id in GENERATED_ICONS);
+    expect(collisions).toEqual([]);
+    expect(ICON_IDS).toHaveLength(
+      Object.keys(GENERATED_ICONS).length + Object.keys(HAND_ICONS).length,
+    );
   });
 
   it('covers every skill in the registry by its icon id', () => {
@@ -15,7 +24,8 @@ describe('icon registry', () => {
   });
 
   it('covers the contact and toolbar icons', () => {
-    for (const id of ['envelope', 'linkedin', 'github', 'chevron-left', 'chevron-right']) {
+    const ids: IconId[] = ['envelope', 'linkedin', 'github', 'chevron-left', 'chevron-right'];
+    for (const id of ids) {
       expect(ICONS[id]).toBeDefined();
     }
   });

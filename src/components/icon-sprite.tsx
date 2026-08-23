@@ -1,5 +1,5 @@
 import type { SVGProps } from 'react';
-import { ICONS } from './icons';
+import { ICONS, type IconId } from './icons';
 
 /**
  * Every icon defined exactly once as a `<symbol>`; everything else on the page
@@ -23,7 +23,7 @@ export function Icon({
   id,
   className = 'h-7 w-7',
   ...props
-}: { id: string } & SVGProps<SVGSVGElement>) {
+}: { id: IconId } & SVGProps<SVGSVGElement>) {
   return (
     <svg className={className} fill="currentColor" aria-hidden="true" {...props}>
       <use href={`#i-${id}`} />

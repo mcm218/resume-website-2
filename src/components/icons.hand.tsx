@@ -1,7 +1,7 @@
 // Hand-extracted from the Angular svg-renderer (IcoMoon / simple-icons sources).
 import type { IconArtwork } from './icons';
 
-export const HAND_ICONS: Record<string, IconArtwork> = {
+export const HAND_ICONS = {
   cplusplus: {
     viewBox: '0 0 32 32',
     children: (
@@ -66,4 +66,4 @@ export const HAND_ICONS: Record<string, IconArtwork> = {
       </>
     ),
   },
-};
+} satisfies Record<string, IconArtwork>;

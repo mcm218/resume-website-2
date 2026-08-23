@@ -25,13 +25,13 @@ importers:
         version: 4.4.3
     devDependencies:
       '@fortawesome/free-brands-svg-icons':
-        specifier: ^7.3.1
+        specifier: 7.3.1
         version: 7.3.1
       '@fortawesome/free-regular-svg-icons':
-        specifier: ^7.3.1
+        specifier: 7.3.1
         version: 7.3.1
       '@fortawesome/free-solid-svg-icons':
-        specifier: ^7.3.1
+        specifier: 7.3.1
         version: 7.3.1
       '@tailwindcss/postcss':
         specifier: ^4
