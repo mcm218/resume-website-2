@@ -1,3 +1,5 @@
+# Postinstall scripts that are not needed: each of these packages ships
+# prebuilt binaries as optional dependencies (sharp is what next/image uses).
 allowBuilds:
   esbuild: false
   sharp: false

@@ -42,25 +42,29 @@ behavioural gate (below).
 
 ## Editing resume data
 
-The site renders one document, the **resume** (see `CONTEXT.md`). Until the data port lands, the
-legacy document lives at `src/assets/me.json`; its replacement is `src/data/resume.json`, validated
-by the zod schema in `src/data/schema.ts` per
-[`docs/specs/resume-schema.md`](docs/specs/resume-schema.md):
+The site renders one document, the **resume** (see `CONTEXT.md`). At this stage of the port the
+legacy document still lives at `src/assets/me.json` and nothing renders it yet.
+
+The data ticket replaces it with `src/data/resume.json`, validated at import by a zod schema
+(`src/data/schema.ts`) per [`docs/specs/resume-schema.md`](docs/specs/resume-schema.md):
 
 - dates are `YYYY-MM`; `end: null` means Present
 - every experience item lists skills by their registry id (`src/data/skills.ts`)
 - notes are plain text; `links` are optional `{ label, url }` pairs
 - skill blocks carry a `level` from 1 to 10
 
-A bad date or unknown skill id fails `pnpm test` and `pnpm build`.
+Once that lands, a bad date or unknown skill id fails `pnpm test` and `pnpm build`.
 
 ## Lighthouse CI
 
 Target for `/`: desktop 100/100/100/100, mobile ≥ 97 performance and 100 elsewhere
 ([ADR 0001](docs/adr/0001-nextjs-over-astro-accept-97-mobile.md)).
-`.github/workflows/lighthouse.yml` runs `treosh/lighthouse-ci-action` against each Vercel preview
-deployment (`on: deployment_status`) with `lighthouserc.mobile.json` and `lighthouserc.desktop.json`;
-it can also be run by hand with `workflow_dispatch` and a `url` input.
+
+Not wired up yet. The Lighthouse ticket adds `.github/workflows/lighthouse.yml`, which runs
+`treosh/lighthouse-ci-action` against each Vercel preview deployment (`on: deployment_status`) with
+`lighthouserc.mobile.json` and `lighthouserc.desktop.json`, and can be run by hand with
+`workflow_dispatch` and a `url` input. Details in
+[`docs/specs/nextjs-port.md`](docs/specs/nextjs-port.md#lighthouse-ci).
 
 ## Deploy
 
